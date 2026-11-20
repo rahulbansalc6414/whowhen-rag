@@ -1,0 +1,28 @@
+"""whowhen: detect time and author filters in RAG queries, cheaply.
+
+    from whowhen import Detector, Field
+
+    detector = Detector(
+        fields=[Field("modified_on", role="updated_at"), Field("owner", role="created_by")],
+        llm=my_llm,  # prompt in, text out
+    )
+    filters = detector.detect("what did Priya change last week?")
+"""
+from .classifier import Classifier, JevClassifier
+from .detector import Detector
+from .fields import Field
+from .filters import Condition, Filters, Sort, Trace
+from .gates import regex_signal
+
+__all__ = [
+    "Classifier",
+    "Condition",
+    "Detector",
+    "Field",
+    "Filters",
+    "JevClassifier",
+    "Sort",
+    "Trace",
+    "regex_signal",
+]
+__version__ = "0.1.0"
