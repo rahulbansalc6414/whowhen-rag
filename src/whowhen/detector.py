@@ -6,7 +6,7 @@ from collections.abc import Callable
 from datetime import date, datetime, timezone
 
 from .classifier import Classifier, JevClassifier
-from .extract import ExtractionError, build_prompt, parse_answer
+from .extract import DEFAULT_PROMPT, ExtractionError, build_prompt, load_prompt, parse_answer
 from .fields import Field
 from .filters import Condition, Filters, Sort, Trace
 from .gates import regex_signal
@@ -32,6 +32,8 @@ class Detector:
         classifier: A custom classifier. Defaults to JevClassifier(), which reads
             TYPESAFE_API_KEY from the environment.
         today: Returns today's date for relative periods ("last week"). Defaults to UTC today.
+        prompt: The extraction prompt: a built-in version ("v2", the default, or "v1"), a path to
+            your own template file, or the template text. See docs/prompts.md.
 
     Example:
         >>> detector = Detector(
@@ -50,6 +52,7 @@ class Detector:
         use_classifier: bool = True,
         classifier: Classifier | None = None,
         today: Callable[[], date] | None = None,
+        prompt: str = DEFAULT_PROMPT,
     ) -> None:
         if not fields:
             raise ValueError("Declare at least one Field")
@@ -66,6 +69,7 @@ class Detector:
         if use_classifier:
             self.classifier = classifier if classifier is not None else JevClassifier()
         self._today = today or _utc_today
+        self.prompt_template = load_prompt(prompt)
 
     # --- gates ----------------------------------------------------------------
 
@@ -95,7 +99,7 @@ class Detector:
 
         trace.llm_called = True
         try:
-            answer = self.llm(build_prompt(query, self.fields, self._today()))
+            answer = self.llm(build_prompt(query, self.fields, self._today(), self.prompt_template))
             extraction = parse_answer(answer, self.fields)
         except ExtractionError as e:
             logger.warning("whowhen: could not parse the LLM answer, no filter applied: %s", e)

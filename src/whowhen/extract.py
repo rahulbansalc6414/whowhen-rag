@@ -10,50 +10,52 @@ import json
 import re
 from dataclasses import dataclass, field
 from datetime import date
+from importlib.resources import files
+from pathlib import Path
 
 from .fields import DEFAULT_DESCRIPTIONS, PERSON_ROLES, TIME_ROLES, Field
 
-PROMPT_TEMPLATE = """You turn a search query into metadata filters for a document search.
-Today is {today} ({weekday}).
-
-Filters you may use:
-{filters}
-
-Answer with JSON only, using exactly these keys:
-{{
-  "time_ranges": [{{"field": "<time filter>", "start": "YYYY-MM-DD or null", "end": "YYYY-MM-DD or null"}}],
-  "people": [{{"field": "<person filter>", "name": "<name as written in the query>"}}],
-  "sort": {{"field": "<time filter>", "order": "newest or oldest"}} or null,
-  "list_only": true or false,
-  "cleaned_query": "<the query without its time and person conditions>"
-}}
-
-Rules:
-- Use only the filter names listed above. Leave a list empty when the query has no such condition.
-- start is inclusive and end is exclusive; null means open-ended. Weeks start on Monday.
-  Examples: "yesterday" = yesterday to today. "last week" = the previous Monday to this Monday.
-  "this month" = the 1st of this month to null. "last 30 days" = today minus 30 days to null.
-  "in 2025" = 2025-01-01 to 2026-01-01.
-- "recent", "latest", "newest" with no period: no time range, sort by newest.
-- A person filter is someone who wrote, created, edited or owns documents. Copy the name as written.
-  A person who is only the topic of the question is not a filter ("what is Priya's role?" has none).
-- list_only is true when the query only asks to list or count documents and names no topic to
-  search for ("pages Priya created this week"). cleaned_query is then "".
-- cleaned_query keeps the topic words, e.g. "pricing docs Priya updated last week" -> "pricing docs".
-- If the query has no time or person condition: empty lists, sort null, list_only false,
-  cleaned_query = the query unchanged.
-
-Query: {query}"""
+PROMPTS_DIR = files("whowhen") / "prompts"
+BUILTIN_PROMPTS: tuple[str, ...] = ("v1", "v2")
+DEFAULT_PROMPT = "v2"
+REQUIRED_PLACEHOLDERS: tuple[str, ...] = ("{query}", "{filters}", "{today}")
 
 
-def build_prompt(query: str, fields: list[Field], today: date) -> str:
+def load_prompt(prompt: str = DEFAULT_PROMPT) -> str:
+    """Return a prompt template from a built-in name ("v1", "v2"), a file path, or template text.
+
+    Templates use {query}, {filters}, {today} (required) and {weekday} (optional).
+    Every other brace is literal, so JSON examples need no escaping.
+    """
+    if prompt in BUILTIN_PROMPTS:
+        template = (PROMPTS_DIR / f"{prompt}.txt").read_text(encoding="utf-8").rstrip("\n")
+    elif "{query}" in prompt:
+        template = prompt
+    else:
+        path = Path(prompt).expanduser()
+        if not path.is_file():
+            raise ValueError(
+                f"prompt={prompt!r} is not a built-in prompt {BUILTIN_PROMPTS}, a file, or a template "
+                "containing {query}"
+            )
+        template = path.read_text(encoding="utf-8").rstrip("\n")
+    missing = [p for p in REQUIRED_PLACEHOLDERS if p not in template]
+    if missing:
+        raise ValueError(f"Prompt template is missing placeholders: {', '.join(missing)}")
+    return template
+
+
+def build_prompt(query: str, fields: list[Field], today: date, template: str | None = None) -> str:
     seen: dict[str, str] = {}
     for f in fields:
         seen.setdefault(f.role, f.description or DEFAULT_DESCRIPTIONS[f.role])
     lines = [f"- {role}: {desc}" for role, desc in seen.items()]
-    return PROMPT_TEMPLATE.format(
-        today=today.isoformat(), weekday=today.strftime("%A"), filters="\n".join(lines), query=query
-    )
+    text = template if template is not None else load_prompt()
+    # The query goes in last so text inside it is never treated as a placeholder.
+    for key, value in (("{today}", today.isoformat()), ("{weekday}", today.strftime("%A")),
+                       ("{filters}", "\n".join(lines))):
+        text = text.replace(key, value)
+    return text.replace("{query}", query)
 
 
 @dataclass

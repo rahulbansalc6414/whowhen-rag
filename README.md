@@ -34,7 +34,18 @@ query
 - **Gate 2** ([Jev](https://pypi.org/project/typesafe-sdk/)) catches unusual wording ("anything Priya put together on onboarding?"). It answers yes or no with a probability. It cannot pull out the dates or names, which is why step 3 exists.
 - **Step 3** runs only when a gate says yes, so plain questions ("how does caching work?") never reach a paid model.
 
-Every result carries a `trace` (`gate`, `classifier_called`, `llm_called`), so you can measure the savings on your own traffic. `benchmarks/gates.py` shows where each query in the synthetic test set stops.
+Every result carries a `trace` (`gate`, `classifier_called`, `llm_called`), so you can measure the savings on your own traffic.
+
+### Measured
+
+On the synthetic benchmark sets (details and history in [`benchmarks/RESULTS.md`](benchmarks/RESULTS.md)):
+
+- **Plain questions:** 20 of 20 stopped by the gates. No LLM call.
+- **Unusual wording the regex misses:** 8 of 8 caught by the Jev classifier.
+- **Extraction** (Claude Haiku 4.5): 45 of 45 queries turned into exactly the right filters (dates, people, sort), including combined conditions and questions that must get no filter.
+- **Cost of an extraction:** about 750 input and 75 output tokens, about **$0.0011** at Haiku 4.5 list price (about $1.10 per 1,000 queries that reach the LLM), median 1.6 s.
+
+These are small, hand-written sets. Measure on your own queries before relying on the numbers.
 
 ## Install
 
@@ -123,6 +134,17 @@ def llm(prompt: str) -> str:
                                        messages=[{"role": "user", "content": prompt}])
     return r.choices[0].message.content or ""
 ```
+
+## Prompts
+
+The extraction prompt is a plain text file, versioned and measured. `v2` is the default; `v1` is kept so you can see what changed and why.
+
+```python
+Detector(fields, llm, prompt="v1")             # an older built-in version
+Detector(fields, llm, prompt="my_prompt.txt")  # your own template
+```
+
+v2 fixed five failure patterns found by the benchmark ("in October" read as last year, a year in a topic name read as a filter, and others), going from 37 to 45 of 45 correct. See [`docs/prompts.md`](docs/prompts.md) for the before and after, the template placeholders, and how to score your own prompt.
 
 ## The classifier (Jev)
 

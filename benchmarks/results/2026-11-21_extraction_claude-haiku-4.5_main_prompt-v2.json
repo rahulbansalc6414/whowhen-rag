@@ -1,0 +1,257 @@
+{
+  "summary": {
+    "date": "2026-11-21",
+    "commit": "cb236e2",
+    "model": "anthropic/claude-haiku-4.5",
+    "set": "main",
+    "label": "prompt-v2",
+    "cases": 30,
+    "filters_exact": 30,
+    "list_only_correct": 29,
+    "avg_prompt_tokens": 748,
+    "avg_completion_tokens": 74,
+    "median_seconds": 1.56
+  },
+  "results": [
+    {
+      "query": "what changed in the refund policy last week?",
+      "filters_ok": true,
+      "errors": [],
+      "list_only_ok": true,
+      "list_only": false,
+      "cleaned_query": "refund policy"
+    },
+    {
+      "query": "pages updated yesterday",
+      "filters_ok": true,
+      "errors": [],
+      "list_only_ok": true,
+      "list_only": true,
+      "cleaned_query": ""
+    },
+    {
+      "query": "onboarding docs edited this month",
+      "filters_ok": true,
+      "errors": [],
+      "list_only_ok": true,
+      "list_only": false,
+      "cleaned_query": "onboarding docs"
+    },
+    {
+      "query": "postmortems written in 2025",
+      "filters_ok": true,
+      "errors": [],
+      "list_only_ok": true,
+      "list_only": false,
+      "cleaned_query": "postmortems"
+    },
+    {
+      "query": "design reviews created since March",
+      "filters_ok": true,
+      "errors": [],
+      "list_only_ok": true,
+      "list_only": false,
+      "cleaned_query": "design reviews"
+    },
+    {
+      "query": "docs modified in October",
+      "filters_ok": true,
+      "errors": [],
+      "list_only_ok": true,
+      "list_only": true,
+      "cleaned_query": ""
+    },
+    {
+      "query": "meeting notes created in Q3",
+      "filters_ok": true,
+      "errors": [],
+      "list_only_ok": true,
+      "list_only": false,
+      "cleaned_query": "meeting notes"
+    },
+    {
+      "query": "security policies updated in the last 30 days",
+      "filters_ok": true,
+      "errors": [],
+      "list_only_ok": true,
+      "list_only": false,
+      "cleaned_query": "security policies"
+    },
+    {
+      "query": "notes edited before September",
+      "filters_ok": true,
+      "errors": [],
+      "list_only_ok": false,
+      "list_only": true,
+      "cleaned_query": ""
+    },
+    {
+      "query": "list documents created last month",
+      "filters_ok": true,
+      "errors": [],
+      "list_only_ok": true,
+      "list_only": true,
+      "cleaned_query": ""
+    },
+    {
+      "query": "latest deployment runbook",
+      "filters_ok": true,
+      "errors": [],
+      "list_only_ok": true,
+      "list_only": false,
+      "cleaned_query": "deployment runbook"
+    },
+    {
+      "query": "oldest page about the billing service",
+      "filters_ok": true,
+      "errors": [],
+      "list_only_ok": true,
+      "list_only": false,
+      "cleaned_query": "page about the billing service"
+    },
+    {
+      "query": "pages written by Priya",
+      "filters_ok": true,
+      "errors": [],
+      "list_only_ok": true,
+      "list_only": true,
+      "cleaned_query": ""
+    },
+    {
+      "query": "specs created by Marco about payments",
+      "filters_ok": true,
+      "errors": [],
+      "list_only_ok": true,
+      "list_only": false,
+      "cleaned_query": "specs about payments"
+    },
+    {
+      "query": "did Aiko write anything on caching?",
+      "filters_ok": true,
+      "errors": [],
+      "list_only_ok": true,
+      "list_only": false,
+      "cleaned_query": "caching"
+    },
+    {
+      "query": "has Lena Fischer edited the style guide",
+      "filters_ok": true,
+      "errors": [],
+      "list_only_ok": true,
+      "list_only": false,
+      "cleaned_query": "style guide"
+    },
+    {
+      "query": "docs by Tomas on search ranking",
+      "filters_ok": true,
+      "errors": [],
+      "list_only_ok": true,
+      "list_only": false,
+      "cleaned_query": "docs on search ranking"
+    },
+    {
+      "query": "Priya's notes on the vendor review",
+      "filters_ok": true,
+      "errors": [],
+      "list_only_ok": true,
+      "list_only": false,
+      "cleaned_query": "notes on the vendor review"
+    },
+    {
+      "query": "anything Priya put together on onboarding?",
+      "filters_ok": true,
+      "errors": [],
+      "list_only_ok": true,
+      "list_only": false,
+      "cleaned_query": "onboarding"
+    },
+    {
+      "query": "show me Marco's stuff about the billing rewrite",
+      "filters_ok": true,
+      "errors": [],
+      "list_only_ok": true,
+      "list_only": false,
+      "cleaned_query": "billing rewrite"
+    },
+    {
+      "query": "pages written by Priya or Marco",
+      "filters_ok": true,
+      "errors": [],
+      "list_only_ok": true,
+      "list_only": true,
+      "cleaned_query": ""
+    },
+    {
+      "query": "pricing docs Priya edited last week",
+      "filters_ok": true,
+      "errors": [],
+      "list_only_ok": true,
+      "list_only": false,
+      "cleaned_query": "pricing docs"
+    },
+    {
+      "query": "pages Priya created this week",
+      "filters_ok": true,
+      "errors": [],
+      "list_only_ok": true,
+      "list_only": true,
+      "cleaned_query": ""
+    },
+    {
+      "query": "what did Marco change in the API docs yesterday",
+      "filters_ok": true,
+      "errors": [],
+      "list_only_ok": true,
+      "list_only": false,
+      "cleaned_query": "API docs"
+    },
+    {
+      "query": "most recent docs by Aiko",
+      "filters_ok": true,
+      "errors": [],
+      "list_only_ok": true,
+      "list_only": true,
+      "cleaned_query": ""
+    },
+    {
+      "query": "what is our refund policy?",
+      "filters_ok": true,
+      "errors": [],
+      "list_only_ok": true,
+      "list_only": false,
+      "cleaned_query": "what is our refund policy?"
+    },
+    {
+      "query": "what is Priya's role on the payments team",
+      "filters_ok": true,
+      "errors": [],
+      "list_only_ok": true,
+      "list_only": false,
+      "cleaned_query": "what is Priya's role on the payments team"
+    },
+    {
+      "query": "how does the 2025 pricing model work",
+      "filters_ok": true,
+      "errors": [],
+      "list_only_ok": true,
+      "list_only": false,
+      "cleaned_query": "how does the 2025 pricing model work"
+    },
+    {
+      "query": "who is responsible for approving vendor contracts",
+      "filters_ok": true,
+      "errors": [],
+      "list_only_ok": true,
+      "list_only": false,
+      "cleaned_query": "who is responsible for approving vendor contracts"
+    },
+    {
+      "query": "who wrote the incident response playbook?",
+      "filters_ok": true,
+      "errors": [],
+      "list_only_ok": true,
+      "list_only": false,
+      "cleaned_query": "incident response playbook"
+    }
+  ]
+}
