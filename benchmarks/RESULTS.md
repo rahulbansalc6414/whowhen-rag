@@ -20,8 +20,8 @@ The regex patterns and these queries were written together, so the regex rows sh
 |---|---|---|---|---|---|---|---|
 | 2026-11-20 | cb236e2 | v1 | main (30) | 26/30 | 27/30 | 544 / 76 | 1.23 s |
 | 2026-11-21 | cb236e2 | v1 | holdout (15) | 11/15 | 13/15 | 545 / 80 | 1.78 s |
-| 2026-11-21 | uncommitted (v2) | v2 | main (30) | 30/30 | 29/30 | 748 / 74 | 1.56 s |
-| 2026-11-21 | uncommitted (v2) | v2 | holdout (15) | 15/15 | 15/15 | 749 / 77 | 1.63 s |
+| 2026-11-21 | a7d1ba0 | v2 | main (30) | 30/30 | 29/30 | 748 / 74 | 1.56 s |
+| 2026-11-21 | a7d1ba0 | v2 | holdout (15) | 15/15 | 15/15 | 749 / 77 | 1.63 s |
 
 Prompt v1 failures: a month without a year read as last year ("in October" -> 2025), "last month" read as the last 30 days, a year in a topic name read as a filter ("the 2025 pricing model", "2026 hiring plan"), a sort added when none was asked, and "past two weeks" ending at today (which drops today's documents).
 Prompt v2 adds a rule for each of these. The holdout set was written before v2, but its v1 failures were seen while writing v2, so the v2 holdout score is not a clean held-out measurement. A fresh set is the next check.
