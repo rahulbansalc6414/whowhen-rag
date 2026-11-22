@@ -1,0 +1,16 @@
+name: Feature request
+description: A new option, store adapter, role, or language
+labels: [enhancement]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: What are you trying to do?
+      description: The kind of query or setup that whowhen does not handle today, with example queries.
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: What would help?
+      description: The option or behaviour you have in mind, if any.

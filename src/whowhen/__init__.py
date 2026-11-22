@@ -8,6 +8,8 @@
     )
     filters = detector.detect("what did Priya change last week?")
 """
+from importlib.metadata import PackageNotFoundError, version
+
 from .classifier import Classifier, JevClassifier
 from .detector import Detector
 from .fields import Field
@@ -25,4 +27,7 @@ __all__ = [
     "Trace",
     "regex_signal",
 ]
-__version__ = "0.1.0"
+try:
+    __version__ = version("whowhen")
+except PackageNotFoundError:  # running from a source tree without installing
+    __version__ = "0.0.0"

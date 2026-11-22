@@ -69,3 +69,27 @@ HOLDOUT = [
     ("design docs created in May", [("created_at", "2026-05-01", "2026-06-01")], [], None, False),
     ("what did the security team write in March 2025", [("created_at", "2025-03-01", "2025-04-01")], [], None, False),
 ]
+
+# Fresh: written 2026-11-22 after prompt v2 was final, labelled before the first run.
+# Not used to tune any prompt. The clean held-out measurement for v2.
+FRESH = [
+    ("architecture notes Marco wrote in August", [("created_at", "2026-08-01", "2026-09-01")],
+     [("created_by", "Marco")], None, False),
+    ("show everything edited yesterday", [("updated_at", "2026-11-17", "2026-11-18")], [], None, True),
+    ("pages created this year about compliance", [("created_at", "2026-01-01", None)], [], None, False),
+    ("what did Aiko update last week in the onboarding guide", [("updated_at", "2026-11-09", "2026-11-16")],
+     [("updated_by", "Aiko")], None, False),
+    ("who maintains the release checklist", [], [], None, False),
+    ("the 2024 security audit findings", [], [], None, False),
+    ("how does Q2 revenue recognition work", [], [], None, False),
+    ("the oldest notes on the data migration", [], [], ("created_at|updated_at", "oldest"), False),
+    ("docs Lena Fischer created in 2025", [("created_at", "2025-01-01", "2026-01-01")],
+     [("created_by", "Lena Fischer")], None, True),
+    ("postmortems from the last 90 days", [("created_at|updated_at", "2026-08-20", None)], [], None, False),
+    ("what changed in the vendor policy since September", [("updated_at", "2026-09-01", None)], [], None, False),
+    ("pages written by Tomas before June", [("created_at", None, "2026-06-01")], [("created_by", "Tomas")],
+     None, True),
+    ("what is Marco's opinion on the caching proposal", [], [], None, False),
+    ("the latest pricing FAQ", [], [], ("created_at|updated_at", "newest"), False),
+    ("notes edited in the past 48 hours", [("updated_at", "2026-11-16", None)], [], None, True),
+]

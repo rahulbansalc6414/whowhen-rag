@@ -1,0 +1,34 @@
+name: Bug report
+description: Wrong filters, a crash, or behaviour that does not match the docs
+labels: [bug]
+body:
+  - type: textarea
+    id: query
+    attributes:
+      label: Query and result
+      description: The query, the filters you got (`f.to_dict()`), and the filters you expected. Please replace any private names or data.
+      placeholder: |
+        Query: "docs Priya edited last month"
+        Got: ...
+        Expected: ...
+    validations:
+      required: true
+  - type: textarea
+    id: setup
+    attributes:
+      label: Setup
+      description: Your Field declarations, the LLM and model you pass as `llm=`, the prompt version, and whether the classifier is on.
+    validations:
+      required: true
+  - type: input
+    id: versions
+    attributes:
+      label: Versions
+      description: Output of `python -c "import whowhen, sys; print(whowhen.__version__, sys.version)"`
+    validations:
+      required: true
+  - type: textarea
+    id: trace
+    attributes:
+      label: Trace or traceback
+      description: "`f.trace`, and any warning logged by the `whowhen` logger or a full traceback."

@@ -38,11 +38,11 @@ Every result carries a `trace` (`gate`, `classifier_called`, `llm_called`), so y
 
 ### Measured
 
-On the synthetic benchmark sets (details and history in [`benchmarks/RESULTS.md`](benchmarks/RESULTS.md)):
+On the synthetic benchmark sets (details and history in [`benchmarks/RESULTS.md`](https://github.com/rahulbansalc6414/whowhen/blob/main/benchmarks/RESULTS.md)):
 
 - **Plain questions:** 20 of 20 stopped by the gates. No LLM call.
 - **Unusual wording the regex misses:** 8 of 8 caught by the Jev classifier.
-- **Extraction** (Claude Haiku 4.5): 45 of 45 queries turned into exactly the right filters (dates, people, sort), including combined conditions and questions that must get no filter.
+- **Extraction** (Claude Haiku 4.5, prompt v2): **13 of 15** exactly right (dates, people, sort) on a fresh set written after the prompt was final, and 45 of 45 on the sets used while writing it. Misses on the fresh set: "since September" read as last year, and one arguable person filter.
 - **Cost of an extraction:** about 750 input and 75 output tokens, about **$0.0011** at Haiku 4.5 list price (about $1.10 per 1,000 queries that reach the LLM), median 1.6 s.
 
 These are small, hand-written sets. Measure on your own queries before relying on the numbers.
@@ -73,7 +73,7 @@ if f:                                    # same as f.needs_filter
     search_text = f.cleaned_query        # "onboarding"
 ```
 
-Set `TYPESAFE_API_KEY` for the Jev classifier. A runnable example with sqlite is in [`examples/quickstart.py`](examples/quickstart.py).
+Set `TYPESAFE_API_KEY` for the Jev classifier. A runnable example with sqlite is in [`examples/quickstart.py`](https://github.com/rahulbansalc6414/whowhen/blob/main/examples/quickstart.py).
 
 ## Your columns, your names
 
@@ -144,7 +144,7 @@ Detector(fields, llm, prompt="v1")             # an older built-in version
 Detector(fields, llm, prompt="my_prompt.txt")  # your own template
 ```
 
-v2 fixed five failure patterns found by the benchmark ("in October" read as last year, a year in a topic name read as a filter, and others), going from 37 to 45 of 45 correct. See [`docs/prompts.md`](docs/prompts.md) for the before and after, the template placeholders, and how to score your own prompt.
+v2 fixed five failure patterns found by the benchmark ("in October" read as last year, a year in a topic name read as a filter, and others), going from 37 to 45 of 45 correct on the sets used while writing it, and 13 of 15 on a fresh set. See [`docs/prompts.md`](https://github.com/rahulbansalc6414/whowhen/blob/main/docs/prompts.md) for the before and after, the template placeholders, and how to score your own prompt.
 
 ## The classifier (Jev)
 

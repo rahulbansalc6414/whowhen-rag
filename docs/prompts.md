@@ -48,6 +48,8 @@ v2 also states `list_only` more precisely: it is true when only generic document
 | v1 | 26 | 11 | 545 / 78 |
 | v2 | **30** | **15** | 750 / 75 |
 
+On a **fresh** set of 15 queries written after v2 was final, v2 scored **13/15**: "since September" was still read as last year, and "what is Marco's opinion on the caching proposal" got a person filter (arguable). That is the honest number for v2, and the starting point for a v3.
+
 The extra rules cost about 200 input tokens per call: about $0.0002 more per extraction with Haiku 4.5. The held-out queries were written before v2, but their v1 failures were seen while writing v2, so the v2 held-out score is not a clean held-out measurement. Full history: [`benchmarks/RESULTS.md`](../benchmarks/RESULTS.md).
 
 ## Writing your own

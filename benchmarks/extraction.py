@@ -18,7 +18,7 @@ import urllib.request
 from datetime import date
 from pathlib import Path
 
-from extraction_cases import CASES, HOLDOUT, TODAY
+from extraction_cases import CASES, FRESH, HOLDOUT, TODAY
 
 from whowhen import Field
 from whowhen.extract import build_prompt, load_prompt, parse_answer
@@ -79,7 +79,7 @@ def check(case, ex) -> list[str]:
 def main() -> None:
     ap = argparse.ArgumentParser()
     ap.add_argument("--model", default="anthropic/claude-haiku-4.5")
-    ap.add_argument("--set", choices=["main", "holdout"], default="main")
+    ap.add_argument("--set", choices=["main", "holdout", "fresh"], default="main")
     ap.add_argument("--prompt", default="v2", help="built-in prompt (v1, v2) or a path to your template")
     ap.add_argument("--label", default="", help="suffix for the result file; defaults to prompt-<name>")
     args = ap.parse_args()
@@ -89,7 +89,7 @@ def main() -> None:
     today = date.fromisoformat(TODAY)
 
     results, filters_ok, list_ok, seconds = [], 0, 0, []
-    cases = CASES if args.set == "main" else HOLDOUT
+    cases = {"main": CASES, "holdout": HOLDOUT, "fresh": FRESH}[args.set]
     for case in cases:
         t0 = time.perf_counter()
         ex = parse_answer(llm(build_prompt(case[0], FIELDS, today, template)), FIELDS)
