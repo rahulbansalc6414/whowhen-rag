@@ -24,11 +24,11 @@ body:
     id: versions
     attributes:
       label: Versions
-      description: Output of `python -c "import whowhen, sys; print(whowhen.__version__, sys.version)"`
+      description: Output of `python -c "import whowhen_rag, sys; print(whowhen.__version__, sys.version)"`
     validations:
       required: true
   - type: textarea
     id: trace
     attributes:
       label: Trace or traceback
-      description: "`f.trace`, and any warning logged by the `whowhen` logger or a full traceback."
+      description: "`f.trace`, and any warning logged by the `whowhen_rag` logger or a full traceback."

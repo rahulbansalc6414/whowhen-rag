@@ -1,11 +1,11 @@
 # Prompts
 
-The extraction prompt is a plain text template in [`src/whowhen/prompts/`](../src/whowhen/prompts/). It is the only part of `whowhen` that talks to your LLM, so it is the part most worth tuning.
+The extraction prompt is a plain text template in [`src/whowhen_rag/prompts/`](../src/whowhen_rag/prompts/). It is the only part of `whowhen-rag` that talks to your LLM, so it is the part most worth tuning.
 
 | Version | File | Status |
 |---|---|---|
-| v1 | [`v1.txt`](../src/whowhen/prompts/v1.txt) | first version, kept for comparison |
-| v2 | [`v2.txt`](../src/whowhen/prompts/v2.txt) | **default** |
+| v1 | [`v1.txt`](../src/whowhen_rag/prompts/v1.txt) | first version, kept for comparison |
+| v2 | [`v2.txt`](../src/whowhen_rag/prompts/v2.txt) | **default** |
 
 ```python
 Detector(fields, llm)                         # v2
@@ -27,7 +27,7 @@ Four placeholders are filled in at query time. Every other brace is literal, so 
 
 A template missing a required placeholder is rejected when the `Detector` is created, not at query time.
 
-Whatever the template says, the answer must be the JSON object v2 describes (`time_ranges`, `people`, `sort`, `list_only`, `cleaned_query`): that is what `whowhen` parses and validates.
+Whatever the template says, the answer must be the JSON object v2 describes (`time_ranges`, `people`, `sort`, `list_only`, `cleaned_query`): that is what `whowhen-rag` parses and validates.
 
 ## v1 to v2: what failed and what fixed it
 
@@ -54,7 +54,7 @@ The extra rules cost about 200 input tokens per call: about $0.0002 more per ext
 
 ## Writing your own
 
-1. Copy `src/whowhen/prompts/v2.txt` and edit it: your domain's wording, another language, extra examples.
+1. Copy `src/whowhen_rag/prompts/v2.txt` and edit it: your domain's wording, another language, extra examples.
 2. Score it on the benchmark sets (needs an OpenRouter key; 30 or 15 LLM calls):
 
    ```bash

@@ -2,12 +2,12 @@ import logging
 import sys
 import types
 
-from whowhen import JevClassifier
+from whowhen_rag import JevClassifier
 
 
 def test_no_key_warns_and_answers_no(monkeypatch, caplog):
     monkeypatch.delenv("TYPESAFE_API_KEY", raising=False)
-    with caplog.at_level(logging.WARNING, logger="whowhen"):
+    with caplog.at_level(logging.WARNING, logger="whowhen_rag"):
         clf = JevClassifier()
     assert not clf.enabled
     assert "no Jev API key" in caplog.text
@@ -39,6 +39,6 @@ def test_threshold(monkeypatch):
 
 def test_api_error_answers_no(monkeypatch, caplog):
     _fake_sdk(monkeypatch, error=RuntimeError("503"))
-    with caplog.at_level(logging.WARNING, logger="whowhen"):
+    with caplog.at_level(logging.WARNING, logger="whowhen_rag"):
         assert JevClassifier(api_key="k")("q") is False
     assert "failed" in caplog.text

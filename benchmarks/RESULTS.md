@@ -29,6 +29,6 @@ Prompt v2 adds a rule for each of these. The holdout set was written before v2, 
 
 The **fresh** set (15 queries) was written and labelled after v2 was final and run once, with no prompt change afterwards: the clean measurement for v2 is **13/15**. Failures: "since September" read as September 2025 (the month-without-a-year rule does not hold for "since"), and "what is Marco's opinion on the caching proposal" given a filter on documents by Marco (labelled no filter; arguable). Candidates for a v3, to be scored on another fresh set.
 
-On 2026-11-21 the prompts moved from code into `src/whowhen/prompts/v1.txt` and `v2.txt`. A check confirmed both produce byte-for-byte the same text as the versions measured above, so these numbers apply to the files. Run `benchmarks/extraction.py --prompt v1|v2|<file>` to reproduce.
+On 2026-11-21 the prompts moved from code into `src/whowhen_rag/prompts/v1.txt` and `v2.txt`. A check confirmed both produce byte-for-byte the same text as the versions measured above, so these numbers apply to the files. Run `benchmarks/extraction.py --prompt v1|v2|<file>` to reproduce.
 
 Cost at list price (Haiku 4.5: $1 / MTok input, $5 / MTok output): about $0.0011 per extraction, about $1.10 per 1,000 queries that reach the LLM.

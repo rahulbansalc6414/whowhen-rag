@@ -1,7 +1,7 @@
 import pytest
 from queries import CLASSIFIER_ONLY, PLAIN, REGEX_AUTHOR, REGEX_TIME
 
-from whowhen import regex_signal
+from whowhen_rag import regex_signal
 
 
 @pytest.mark.parametrize("query", REGEX_TIME)

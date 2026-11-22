@@ -13,7 +13,7 @@ import logging
 import os
 from typing import ClassVar, Protocol
 
-logger = logging.getLogger("whowhen")
+logger = logging.getLogger("whowhen_rag")
 
 JEV_API_KEY_ENV = "TYPESAFE_API_KEY"
 
@@ -53,7 +53,7 @@ class JevClassifier:
         self._client = None
         if not self.api_key:
             logger.warning(
-                "whowhen: no Jev API key (set %s or pass JevClassifier(api_key=...)); the classifier is "
+                "whowhen-rag: no Jev API key (set %s or pass JevClassifier(api_key=...)); the classifier is "
                 "off and only the regex gate is active. Pass use_classifier=False to silence this.",
                 JEV_API_KEY_ENV,
             )
@@ -84,7 +84,7 @@ class JevClassifier:
             )
             return float(response.answers["intent"].probabilities.get("filter", 0.0))
         except Exception:
-            logger.warning("whowhen: Jev classifier call failed; treating the query as needing no filter",
+            logger.warning("whowhen-rag: Jev classifier call failed; treating the query as needing no filter",
                            exc_info=True)
             return None
 

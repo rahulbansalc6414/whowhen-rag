@@ -1,6 +1,6 @@
 """End-to-end example with sqlite and an OpenAI-compatible LLM (here: Claude Haiku via OpenRouter).
 
-    pip install whowhen openai
+    pip install whowhen-rag openai
     export OPENROUTER_API_KEY=...      # your LLM
     export TYPESAFE_API_KEY=...        # optional: Jev classifier (gate 2)
     python examples/quickstart.py
@@ -10,7 +10,7 @@ import sqlite3
 
 from openai import OpenAI
 
-from whowhen import Detector, Field
+from whowhen_rag import Detector, Field
 
 client = OpenAI(base_url="https://openrouter.ai/api/v1", api_key=os.environ["OPENROUTER_API_KEY"])
 

@@ -11,7 +11,7 @@ from .fields import Field
 from .filters import Condition, Filters, Sort, Trace
 from .gates import regex_signal
 
-logger = logging.getLogger("whowhen")
+logger = logging.getLogger("whowhen_rag")
 
 LLM = Callable[[str], str]
 
@@ -102,11 +102,11 @@ class Detector:
             answer = self.llm(build_prompt(query, self.fields, self._today(), self.prompt_template))
             extraction = parse_answer(answer, self.fields)
         except ExtractionError as e:
-            logger.warning("whowhen: could not parse the LLM answer, no filter applied: %s", e)
+            logger.warning("whowhen-rag: could not parse the LLM answer, no filter applied: %s", e)
             trace.error = str(e)
             return Filters(cleaned_query=query, trace=trace)
         except Exception as e:
-            logger.warning("whowhen: LLM call failed, no filter applied", exc_info=True)
+            logger.warning("whowhen-rag: LLM call failed, no filter applied", exc_info=True)
             trace.error = f"{type(e).__name__}: {e}"
             return Filters(cleaned_query=query, trace=trace)
 
@@ -159,6 +159,6 @@ class Detector:
         try:
             return f.resolve(name)
         except Exception:
-            logger.warning("whowhen: resolver for %r failed on %r; person filter dropped", f.column, name,
+            logger.warning("whowhen-rag: resolver for %r failed on %r; person filter dropped", f.column, name,
                            exc_info=True)
             return None

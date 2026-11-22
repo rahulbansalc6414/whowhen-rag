@@ -3,8 +3,8 @@ from datetime import date
 import pytest
 from conftest import FIELDS, TODAY, FakeLLM, answer
 
-from whowhen import Detector
-from whowhen.extract import BUILTIN_PROMPTS, build_prompt, load_prompt
+from whowhen_rag import Detector
+from whowhen_rag.extract import BUILTIN_PROMPTS, build_prompt, load_prompt
 
 
 @pytest.mark.parametrize("name", BUILTIN_PROMPTS)

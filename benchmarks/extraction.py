@@ -20,8 +20,8 @@ from pathlib import Path
 
 from extraction_cases import CASES, FRESH, HOLDOUT, TODAY
 
-from whowhen import Field
-from whowhen.extract import build_prompt, load_prompt, parse_answer
+from whowhen_rag import Field
+from whowhen_rag.extract import build_prompt, load_prompt, parse_answer
 
 FIELDS = [Field(r, role=r) for r in ("created_at", "updated_at", "created_by", "updated_by")]
 

@@ -1,4 +1,4 @@
-from whowhen import Condition, Filters, Sort
+from whowhen_rag import Condition, Filters, Sort
 
 F = Filters(conditions=[
     Condition("modified_on", ">=", "2026-11-09"),

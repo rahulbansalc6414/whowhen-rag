@@ -1,8 +1,8 @@
-# whowhen
+# whowhen-rag
 
 **Find the "who" and "when" in a search query, and only pay for an LLM when there is one.**
 
-`whowhen` turns questions like *"what did Priya change in the pricing docs last week?"* into metadata filters for your RAG system:
+`whowhen-rag` turns questions like *"what did Priya change in the pricing docs last week?"* into metadata filters for your RAG system:
 
 ```python
 f = detector.detect("what did Priya change in the pricing docs last week?")
@@ -17,7 +17,7 @@ It works with any vector store or database, any LLM, and any column names.
 
 ## Why it is cheap
 
-Most questions sent to a knowledge base have no time or author condition at all. Framework tools for this (LangChain's `SelfQueryRetriever`, LlamaIndex auto-retrieval) send **every** query to an LLM to find out. `whowhen` puts two cheap gates in front of the LLM:
+Most questions sent to a knowledge base have no time or author condition at all. Framework tools for this (LangChain's `SelfQueryRetriever`, LlamaIndex auto-retrieval) send **every** query to an LLM to find out. `whowhen-rag` puts two cheap gates in front of the LLM:
 
 ```
 query
@@ -38,7 +38,7 @@ Every result carries a `trace` (`gate`, `classifier_called`, `llm_called`), so y
 
 ### Measured
 
-On the synthetic benchmark sets (details and history in [`benchmarks/RESULTS.md`](https://github.com/rahulbansalc6414/whowhen/blob/main/benchmarks/RESULTS.md)):
+On the synthetic benchmark sets (details and history in [`benchmarks/RESULTS.md`](https://github.com/rahulbansalc6414/whowhen-rag/blob/main/benchmarks/RESULTS.md)):
 
 - **Plain questions:** 20 of 20 stopped by the gates. No LLM call.
 - **Unusual wording the regex misses:** 8 of 8 caught by the Jev classifier.
@@ -50,13 +50,13 @@ These are small, hand-written sets. Measure on your own queries before relying o
 ## Install
 
 ```bash
-pip install whowhen
+pip install whowhen-rag
 ```
 
 ## Quick start
 
 ```python
-from whowhen import Detector, Field
+from whowhen_rag import Detector, Field
 
 detector = Detector(
     fields=[
@@ -73,11 +73,11 @@ if f:                                    # same as f.needs_filter
     search_text = f.cleaned_query        # "onboarding"
 ```
 
-Set `TYPESAFE_API_KEY` for the Jev classifier. A runnable example with sqlite is in [`examples/quickstart.py`](https://github.com/rahulbansalc6414/whowhen/blob/main/examples/quickstart.py).
+Set `TYPESAFE_API_KEY` for the Jev classifier. A runnable example with sqlite is in [`examples/quickstart.py`](https://github.com/rahulbansalc6414/whowhen-rag/blob/main/examples/quickstart.py).
 
 ## Your columns, your names
 
-You declare your columns once. The LLM never sees them: it answers in terms of four **roles**, and `whowhen` maps each role to your column.
+You declare your columns once. The LLM never sees them: it answers in terms of four **roles**, and `whowhen-rag` maps each role to your column.
 
 | Role | Meaning |
 |---|---|
@@ -107,7 +107,7 @@ Field(
 
 ## Bring your own LLM
 
-`llm` is any function that takes the prompt and returns the model's text. `whowhen` writes the prompt and validates the answer. Tested with Claude Haiku 4.5; any model that follows JSON instructions should work.
+`llm` is any function that takes the prompt and returns the model's text. `whowhen-rag` writes the prompt and validates the answer. Tested with Claude Haiku 4.5; any model that follows JSON instructions should work.
 
 **Anthropic**
 
@@ -144,21 +144,21 @@ Detector(fields, llm, prompt="v1")             # an older built-in version
 Detector(fields, llm, prompt="my_prompt.txt")  # your own template
 ```
 
-v2 fixed five failure patterns found by the benchmark ("in October" read as last year, a year in a topic name read as a filter, and others), going from 37 to 45 of 45 correct on the sets used while writing it, and 13 of 15 on a fresh set. See [`docs/prompts.md`](https://github.com/rahulbansalc6414/whowhen/blob/main/docs/prompts.md) for the before and after, the template placeholders, and how to score your own prompt.
+v2 fixed five failure patterns found by the benchmark ("in October" read as last year, a year in a topic name read as a filter, and others), going from 37 to 45 of 45 correct on the sets used while writing it, and 13 of 15 on a fresh set. See [`docs/prompts.md`](https://github.com/rahulbansalc6414/whowhen-rag/blob/main/docs/prompts.md) for the before and after, the template placeholders, and how to score your own prompt.
 
 ## The classifier (Jev)
 
 On by default. It reads `TYPESAFE_API_KEY`, or you pass the key:
 
 ```python
-from whowhen import Detector, JevClassifier
+from whowhen_rag import Detector, JevClassifier
 
 Detector(fields, llm, classifier=JevClassifier(api_key="...", threshold=0.5))
 Detector(fields, llm, use_classifier=False)      # regex gate only
 Detector(fields, llm, classifier=my_classifier)  # any function: query -> bool
 ```
 
-Without a key, `whowhen` logs one warning and carries on with the regex gate only; queries the regex misses then get no filter.
+Without a key, `whowhen-rag` logs one warning and carries on with the regex gate only; queries the regex misses then get no filter.
 
 ## Using the result
 
@@ -180,13 +180,13 @@ Only need the yes or no? `detector.has_signal(query)` runs the cheap gates and n
 
 ## Failure behaviour
 
-Search should never break because of filtering. If the classifier or LLM fails, times out or returns something unusable, `detect()` returns "no filter" with the original query and logs a warning (logger `whowhen`). The LLM's answer is validated: unknown roles, invalid dates and empty ranges are dropped, never guessed.
+Search should never break because of filtering. If the classifier or LLM fails, times out or returns something unusable, `detect()` returns "no filter" with the original query and logs a warning (logger `whowhen_rag`). The LLM's answer is validated: unknown roles, invalid dates and empty ranges are dropped, never guessed.
 
 ## Limitations
 
 - English queries only (the regex gate and the prompt are English).
 - Synchronous. Use `asyncio.to_thread` from async code.
-- Four roles (created and updated, time and person). "My documents" needs the current user, which `whowhen` does not know.
+- Four roles (created and updated, time and person). "My documents" needs the current user, which `whowhen-rag` does not know.
 
 ## Development
 

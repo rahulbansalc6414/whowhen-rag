@@ -3,7 +3,7 @@ import logging
 import pytest
 from conftest import FIELDS, TODAY, FakeClassifier, answer
 
-from whowhen import Condition, Detector, Field, Sort
+from whowhen_rag import Condition, Detector, Field, Sort
 
 
 def test_plain_query_never_calls_llm(make_detector):
@@ -124,7 +124,7 @@ def test_prompt_lists_only_declared_roles(make_detector):
 @pytest.mark.parametrize("bad", ["not json", "```json\n[1, 2]\n```", ""])
 def test_unparseable_answer_gives_no_filter(make_detector, bad, caplog):
     d, _ = make_detector(bad)
-    with caplog.at_level(logging.WARNING, logger="whowhen"):
+    with caplog.at_level(logging.WARNING, logger="whowhen_rag"):
         f = d.detect("pages updated yesterday")
     assert not f.needs_filter and f.trace.error
     assert f.cleaned_query == "pages updated yesterday"

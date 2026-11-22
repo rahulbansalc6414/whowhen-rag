@@ -1,6 +1,6 @@
-"""whowhen: detect time and author filters in RAG queries, cheaply.
+"""whowhen-rag: detect time and author filters in RAG queries, cheaply.
 
-    from whowhen import Detector, Field
+    from whowhen_rag import Detector, Field
 
     detector = Detector(
         fields=[Field("modified_on", role="updated_at"), Field("owner", role="created_by")],
@@ -28,6 +28,6 @@ __all__ = [
     "regex_signal",
 ]
 try:
-    __version__ = version("whowhen")
+    __version__ = version("whowhen-rag")
 except PackageNotFoundError:  # running from a source tree without installing
     __version__ = "0.0.0"

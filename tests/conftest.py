@@ -3,7 +3,7 @@ from datetime import date
 
 import pytest
 
-from whowhen import Detector, Field
+from whowhen_rag import Detector, Field
 
 TODAY = date(2026, 11, 18)  # a Wednesday
 

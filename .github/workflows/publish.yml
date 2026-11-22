@@ -2,7 +2,7 @@ name: publish
 # Release: bump version in pyproject.toml, commit, then `git tag vX.Y.Z && git push origin vX.Y.Z`.
 # Uploads to PyPI with trusted publishing (no API token stored anywhere). One-time setup on
 # pypi.org: Account > Publishing > add a pending publisher for owner rahulbansalc6414,
-# repository whowhen, workflow publish.yml, environment pypi.
+# repository whowhen-rag, workflow publish.yml, environment pypi.
 on:
   push:
     tags: ["v*"]
@@ -33,7 +33,7 @@ jobs:
     runs-on: ubuntu-latest
     environment:
       name: pypi
-      url: https://pypi.org/project/whowhen/
+      url: https://pypi.org/project/whowhen-rag/
     permissions:
       id-token: write   # trusted publishing
     steps:

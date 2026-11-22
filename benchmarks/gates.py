@@ -17,7 +17,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "tests"))
 
 from queries import CLASSIFIER_ONLY, PLAIN, REGEX_AUTHOR, REGEX_TIME
 
-from whowhen import Detector, Field
+from whowhen_rag import Detector, Field
 
 GROUPS = {
     "time (needs filter)": (REGEX_TIME, True),

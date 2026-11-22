@@ -15,7 +15,7 @@ from pathlib import Path
 
 from .fields import DEFAULT_DESCRIPTIONS, PERSON_ROLES, TIME_ROLES, Field
 
-PROMPTS_DIR = files("whowhen") / "prompts"
+PROMPTS_DIR = files("whowhen_rag") / "prompts"
 BUILTIN_PROMPTS: tuple[str, ...] = ("v1", "v2")
 DEFAULT_PROMPT = "v2"
 REQUIRED_PLACEHOLDERS: tuple[str, ...] = ("{query}", "{filters}", "{today}")
