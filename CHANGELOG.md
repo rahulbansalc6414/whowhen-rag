@@ -2,9 +2,20 @@
 
 What changed in each release, and why. Benchmark details for every number here are in [`benchmarks/RESULTS.md`](benchmarks/RESULTS.md).
 
-## 0.2.0 (unreleased)
+## 0.2.0 (2026-11-23)
 
-Recency becomes a hint from Jev instead of a sort chosen by the LLM, the tested model moves to Claude Haiku 5.5, and one benchmark now measures the whole pipeline.
+**An upgrade on every measure: faster, about 8 times cheaper, more accurate, and it now gets every "latest" / "recent" question right.**
+
+| | 0.1.0 | **0.2.0** |
+|---|---|---|
+| Recency questions ("latest", "recently", "these days", "what's new") | 11 of 16 right | **16 of 16** |
+| Fully right on the 119-question benchmark | 112 | **113** (Haiku 5.5), 114 (Haiku 4.5) |
+| Time per query (median) | about 1.4 s | **about 0.9 s** |
+| Cost per extraction call | 0.11 cents | **0.013 cents** |
+
+What changed: recency becomes a hint from Jev instead of a sort chosen by the LLM, the tested model moves to Claude Haiku 5.5, and one benchmark now measures the whole pipeline.
+
+**Comparing with the 0.1.0 README.** 0.1.0's README quoted near-perfect scores (8 of 8, 20 of 20, 13 of 15) from two separate, smaller benchmarks: one checked only whether a question reached the LLM, the other only scored the LLM on questions with almost no vague recency wording. Neither could see the recency failures. Those numbers cannot be compared with 0.2.0's. The fair comparison is the table here and below: the 0.1.0 code and the 0.2.0 code on the same 119 questions, scored end to end on the final answer. On that test 0.1.0 scores 112 and 0.2.0 scores 113 to 114.
 
 **Results on the 119-question benchmark** (the same questions for every row):
 

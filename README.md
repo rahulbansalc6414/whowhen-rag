@@ -19,6 +19,8 @@ f.recency        # 'newest'    (a hint: show the most recent material first)
 
 It works with any vector store or database, any LLM, and any column names.
 
+> **New in 0.2.0:** faster (about 0.9 s per query), about 8 times cheaper per extraction (now tested with Claude Haiku 5.5), and every "latest" / "recent" question handled right (16 of 16, was 11 of 16) through the new `f.recency` hint. See the [changelog](https://github.com/rahulbansalc6414/whowhen-rag/blob/main/CHANGELOG.md).
+
 ## Why it is cheap
 
 Most questions sent to a knowledge base have no time or author condition at all. Framework tools for this (LangChain's `SelfQueryRetriever`, LlamaIndex auto-retrieval) make an **extra LLM call on every query** to find out. `whowhen-rag` puts two cheap gates in front of that extra call:

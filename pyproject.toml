@@ -1,6 +1,6 @@
 [project]
 name = "whowhen-rag"
-version = "0.1.0"
+version = "0.2.0"
 description = "Detect time and author filters in RAG queries, cheaply: a free regex gate, a yes/no classifier, and your LLM only when a filter is likely."
 readme = "README.md"
 license = "MIT"
