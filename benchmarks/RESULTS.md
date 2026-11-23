@@ -10,8 +10,8 @@ All 119 labelled questions (81 need a filter, 37 plain, 1 either) take the real 
 | Date | Commit | Design | Model | Prompt | Pipeline | LLM right / called | Recency found | Jev median | LLM median | Cost per extraction |
 |---|---|---|---|---|---|---|---|---|---|---|
 | 2026-11-22 | b2bb4e6 + uncommitted | LLM does recency (sort) | Haiku 4.5 | v2 | 112/119 | 82/89 | 11/16 (by the LLM) | 298 ms | 1430 ms | 0.11 cents |
-| 2026-11-23 | uncommitted | recency from Jev (p >= 0.95), Jev filter gate p >= 0.6 | Haiku 4.5 | v4 | **114/119** | 86/89 | 16/16 | 294 ms | 1270 ms | 0.11 cents |
-| 2026-11-23 | uncommitted | same | **Haiku 5.5, thinking off** | v4 | **113/119** | 85/89 | 16/16 | 298 ms | **949 ms** | **0.013 cents** |
+| 2026-11-23 | c62c8b3 | recency from Jev (p >= 0.95), Jev filter gate p >= 0.6 | Haiku 4.5 | v4 | **114/119** | 86/89 | 16/16 | 294 ms | 1270 ms | 0.11 cents |
+| 2026-11-23 | c62c8b3 | same | **Haiku 5.5, thinking off** | v4 | **113/119** | 85/89 | 16/16 | 298 ms | **949 ms** | **0.013 cents** |
 
 Gates in every run: regex caught 72/81 filter questions; Jev said yes to all 9 the regex missed (confidence 0.68 to 1.00) and no to 30 of 32 plain ones; no filter question was stopped. The 7 plain questions let through (5 "who wrote/owns/updated X?" by the regex, 2 by Jev at 0.84 to 0.89) all came back as no filter.
 
@@ -49,11 +49,11 @@ The regex patterns and these queries were written together, so the regex rows sh
 | 2026-11-21 | a7d1ba0 | v2 | main (30) | 30/30 | 29/30 | 748 / 74 | 1.56 s |
 | 2026-11-21 | a7d1ba0 | v2 | holdout (15) | 15/15 | 15/15 | 749 / 77 | 1.63 s |
 | 2026-11-22 | b465710 | v2 | **fresh (15)** | **13/15** | 15/15 | 749 / 77 | 1.58 s |
-| 2026-11-22 | uncommitted (v3 trial) | v2 | **fresh2 (15)** | **13/15** | 14/15 | 748 / 75 | 1.76 s |
-| 2026-11-22 | uncommitted (v3 trial) | v3 | main (30) | 28/30 | 29/30 | 872 / 74 | 1.51 s |
-| 2026-11-22 | uncommitted (v3 trial) | v3 | holdout (15) | 14/15 | 15/15 | 872 / 77 | 1.46 s |
-| 2026-11-22 | uncommitted (v3 trial) | v3 | fresh (15) | 14/15 | 15/15 | 872 / 76 | 1.82 s |
-| 2026-11-22 | uncommitted (v3 trial) | v3 | **fresh2 (15)** | **14/15** | 14/15 | 871 / 74 | 1.37 s |
+| 2026-11-22 | c62c8b3 (v3 trial) | v2 | **fresh2 (15)** | **13/15** | 14/15 | 748 / 75 | 1.76 s |
+| 2026-11-22 | c62c8b3 (v3 trial) | v3 | main (30) | 28/30 | 29/30 | 872 / 74 | 1.51 s |
+| 2026-11-22 | c62c8b3 (v3 trial) | v3 | holdout (15) | 14/15 | 15/15 | 872 / 77 | 1.46 s |
+| 2026-11-22 | c62c8b3 (v3 trial) | v3 | fresh (15) | 14/15 | 15/15 | 872 / 76 | 1.82 s |
+| 2026-11-22 | c62c8b3 (v3 trial) | v3 | **fresh2 (15)** | **14/15** | 14/15 | 871 / 74 | 1.37 s |
 
 Prompt v1 failures: a month without a year read as last year ("in October" -> 2025), "last month" read as the last 30 days, a year in a topic name read as a filter ("the 2025 pricing model", "2026 hiring plan"), a sort added when none was asked, and "past two weeks" ending at today (which drops today's documents).
 Prompt v2 adds a rule for each of these. The holdout set was written before v2, but its v1 failures were seen while writing v2, so the v2 holdout score is not a clean held-out measurement.
