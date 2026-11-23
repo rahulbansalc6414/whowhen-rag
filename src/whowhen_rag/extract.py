@@ -16,13 +16,13 @@ from pathlib import Path
 from .fields import DEFAULT_DESCRIPTIONS, PERSON_ROLES, TIME_ROLES, Field
 
 PROMPTS_DIR = files("whowhen_rag") / "prompts"
-BUILTIN_PROMPTS: tuple[str, ...] = ("v1", "v2")
-DEFAULT_PROMPT = "v2"
+BUILTIN_PROMPTS: tuple[str, ...] = ("v1", "v2", "v4")
+DEFAULT_PROMPT = "v4"
 REQUIRED_PLACEHOLDERS: tuple[str, ...] = ("{query}", "{filters}", "{today}")
 
 
 def load_prompt(prompt: str = DEFAULT_PROMPT) -> str:
-    """Return a prompt template from a built-in name ("v1", "v2"), a file path, or template text.
+    """Return a prompt template from a built-in name ("v1", "v2", "v4"), a file path, or template text.
 
     Templates use {query}, {filters}, {today} (required) and {weekday} (optional).
     Every other brace is literal, so JSON examples need no escaping.
@@ -64,7 +64,6 @@ class Extraction:
 
     time_ranges: list[tuple[str, date | None, date | None]] = field(default_factory=list)
     people: list[tuple[str, str]] = field(default_factory=list)
-    sort: tuple[str, str] | None = None  # (role, "newest" | "oldest")
     list_only: bool = False
     cleaned_query: str = ""
 
@@ -129,12 +128,6 @@ def parse_answer(text: str, fields: list[Field]) -> Extraction:
         if role is None or not isinstance(name, str) or not name.strip():
             continue
         out.people.append((role, name.strip()))
-
-    sort = data.get("sort")
-    if isinstance(sort, dict) and sort.get("order") in ("newest", "oldest"):
-        role = _pick_role(sort.get("field"), declared, TIME_ROLES)
-        if role is not None:
-            out.sort = (role, sort["order"])
 
     out.list_only = bool(data.get("list_only"))
     cleaned = data.get("cleaned_query")

@@ -1,14 +1,24 @@
-"""Detector: regex gate -> classifier gate -> your LLM, only when a filter is likely."""
+"""Detector: regex gate -> Jev -> your LLM, only when a filter is likely.
+
+Paths through detect():
+- regex hit: your LLM (dates, people) and Jev's recency question run in parallel.
+- regex miss: one Jev call answers both "needs a filter?" and "newest/oldest?". If it
+  needs a filter, your LLM runs next. Otherwise "no filter" is returned, with the
+  recency hint if Jev gave one.
+"""
 from __future__ import annotations
 
 import logging
+import time
 from collections.abc import Callable
+from concurrent.futures import ThreadPoolExecutor
 from datetime import date, datetime, timezone
 
-from .classifier import Classifier, JevClassifier
+from .classifier import Classifier, JevClassifier, Judgement
+from .dates import fix_month_years
 from .extract import DEFAULT_PROMPT, ExtractionError, build_prompt, load_prompt, parse_answer
 from .fields import Field
-from .filters import Condition, Filters, Sort, Trace
+from .filters import Condition, Filters, Trace
 from .gates import regex_signal
 
 logger = logging.getLogger("whowhen_rag")
@@ -26,14 +36,18 @@ class Detector:
     Args:
         fields: Your filterable columns and what they mean. At most one field per role.
         llm: Your LLM as a function: prompt text in, answer text out. Called only when
-            a gate finds a likely filter. Tested with Claude Haiku 4.5; any model that
-            follows JSON instructions works.
-        use_classifier: Run the yes/no classifier on queries the regex misses (default True).
+            a gate finds a likely filter. Tested with Claude Haiku 5.5 (thinking off) and
+            Haiku 4.5; any model that follows JSON instructions works.
+        use_classifier: Use Jev: the filter gate for queries the regex misses, and the
+            recency hint (default True). Without it there is no recency hint.
         classifier: A custom classifier. Defaults to JevClassifier(), which reads
-            TYPESAFE_API_KEY from the environment.
+            TYPESAFE_API_KEY from the environment. A plain function ``query -> bool``
+            works as the filter gate but gives no recency hint.
         today: Returns today's date for relative periods ("last week"). Defaults to UTC today.
-        prompt: The extraction prompt: a built-in version ("v2", the default, or "v1"), a path to
-            your own template file, or the template text. See docs/prompts.md.
+        prompt: The extraction prompt: a built-in version ("v4", the default, or the older
+            "v2", "v1"), a path to your own template file, or the template text. See docs/prompts.md.
+        fix_years: Experimental, off by default. Correct the year when the LLM puts a month
+            named without a year ("since September") in the wrong year. See dates.py.
 
     Example:
         >>> detector = Detector(
@@ -53,6 +67,7 @@ class Detector:
         classifier: Classifier | None = None,
         today: Callable[[], date] | None = None,
         prompt: str = DEFAULT_PROMPT,
+        fix_years: bool = False,
     ) -> None:
         if not fields:
             raise ValueError("Declare at least one Field")
@@ -70,17 +85,38 @@ class Detector:
             self.classifier = classifier if classifier is not None else JevClassifier()
         self._today = today or _utc_today
         self.prompt_template = load_prompt(prompt)
+        self.fix_years = fix_years
+
+    # --- Jev ------------------------------------------------------------------
+
+    def _judge(self, query: str, *, ask_filter: bool, ask_recency: bool) -> tuple[Judgement, bool, int | None]:
+        """Ask the classifier. Returns (answers, needs_filter, milliseconds)."""
+        clf = self.classifier
+        if clf is None:
+            return Judgement(), False, None
+        t0 = time.perf_counter()
+        if hasattr(clf, "judge"):
+            j = clf.judge(query, ask_filter=ask_filter, ask_recency=ask_recency)
+            yes = j.filter_p is not None and j.filter_p >= getattr(clf, "threshold", 0.6)
+        elif ask_filter:
+            yes = bool(clf(query))
+            j = Judgement(filter_p=1.0 if yes else 0.0)
+        else:
+            return Judgement(), False, None
+        return j, yes, round((time.perf_counter() - t0) * 1000)
 
     # --- gates ----------------------------------------------------------------
 
     def gate(self, query: str) -> Trace:
-        """Run only the cheap gates (regex, then classifier). Never calls the LLM."""
+        """Run only the cheap gates (regex, then Jev's filter question). Never calls the LLM."""
         trace = Trace()
         if regex_signal(query):
             trace.gate = "regex"
         elif self.classifier is not None:
             trace.classifier_called = True
-            if self.classifier(query):
+            j, yes, trace.jev_ms = self._judge(query, ask_filter=True, ask_recency=False)
+            trace.jev_filter_p = j.filter_p
+            if yes:
                 trace.gate = "classifier"
         return trace
 
@@ -93,22 +129,36 @@ class Detector:
     def detect(self, query: str) -> Filters:
         """Return the filters for a query. Never raises for model failures: they give no filter."""
         query = (query or "").strip()
-        trace = self.gate(query) if query else Trace()
-        if trace.gate == "none":
-            return Filters(cleaned_query=query, trace=trace)
+        trace = Trace()
+        if not query:
+            return Filters(trace=trace)
 
-        trace.llm_called = True
-        try:
-            answer = self.llm(build_prompt(query, self.fields, self._today(), self.prompt_template))
-            extraction = parse_answer(answer, self.fields)
-        except ExtractionError as e:
-            logger.warning("whowhen-rag: could not parse the LLM answer, no filter applied: %s", e)
-            trace.error = str(e)
-            return Filters(cleaned_query=query, trace=trace)
-        except Exception as e:
-            logger.warning("whowhen-rag: LLM call failed, no filter applied", exc_info=True)
-            trace.error = f"{type(e).__name__}: {e}"
-            return Filters(cleaned_query=query, trace=trace)
+        recency = None
+        if regex_signal(query):
+            trace.gate = "regex"
+            if self.classifier is not None and hasattr(self.classifier, "judge"):
+                # Jev's recency question runs while the LLM extracts dates and people.
+                with ThreadPoolExecutor(max_workers=1) as pool:
+                    future = pool.submit(self._judge, query, ask_filter=False, ask_recency=True)
+                    extraction, error = self._extract(query, trace)
+                    j, _, trace.jev_ms = future.result()
+                trace.classifier_called = True
+                trace.jev_recency_p, recency = j.recency_p, j.recency
+            else:
+                extraction, error = self._extract(query, trace)
+        else:
+            if self.classifier is None:
+                return Filters(cleaned_query=query, trace=trace)
+            trace.classifier_called = True
+            j, yes, trace.jev_ms = self._judge(query, ask_filter=True, ask_recency=True)
+            trace.jev_filter_p, trace.jev_recency_p, recency = j.filter_p, j.recency_p, j.recency
+            if not yes:
+                return Filters(recency=recency, cleaned_query=query, trace=trace)
+            trace.gate = "classifier"
+            extraction, error = self._extract(query, trace)
+
+        if error:
+            return Filters(recency=recency, cleaned_query=query, trace=trace)
 
         conditions: list[Condition] = []
         for role, start, end in extraction.time_ranges:
@@ -138,19 +188,36 @@ class Detector:
             elif values:
                 conditions.append(Condition(f.column, "in", values))
 
-        sort = None
-        if extraction.sort is not None:
-            role, order = extraction.sort
-            sort = Sort(self._by_role[role].column, descending=(order == "newest"))
-
-        list_only = extraction.list_only and bool(conditions or sort)
+        list_only = extraction.list_only and bool(conditions or recency)
         if list_only:
             cleaned = ""
-        else:
+        elif conditions or recency:
             cleaned = extraction.cleaned_query or query
-        if not (conditions or sort):
+        else:
             cleaned = query
-        return Filters(conditions=conditions, sort=sort, list_only=list_only, cleaned_query=cleaned, trace=trace)
+        return Filters(conditions=conditions, recency=recency, list_only=list_only, cleaned_query=cleaned,
+                       trace=trace)
+
+    def _extract(self, query: str, trace: Trace):
+        """Call the LLM. Returns (extraction, error); never raises."""
+        trace.llm_called = True
+        t0 = time.perf_counter()
+        try:
+            today = self._today()
+            answer = self.llm(build_prompt(query, self.fields, today, self.prompt_template))
+            extraction = parse_answer(answer, self.fields)
+            if self.fix_years:
+                trace.year_corrections = fix_month_years(query, extraction, today)
+            return extraction, None
+        except ExtractionError as e:
+            logger.warning("whowhen-rag: could not parse the LLM answer, no filter applied: %s", e)
+            trace.error = str(e)
+        except Exception as e:
+            logger.warning("whowhen-rag: LLM call failed, no filter applied", exc_info=True)
+            trace.error = f"{type(e).__name__}: {e}"
+        finally:
+            trace.llm_ms = round((time.perf_counter() - t0) * 1000)
+        return None, trace.error
 
     @staticmethod
     def _resolve(f: Field, name: str):

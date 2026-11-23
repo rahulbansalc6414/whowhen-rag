@@ -1,4 +1,4 @@
-"""End-to-end example with sqlite and an OpenAI-compatible LLM (here: Claude Haiku via OpenRouter).
+"""End-to-end example with sqlite and an OpenAI-compatible LLM (here: Claude Haiku 5.5 via OpenRouter).
 
     pip install whowhen-rag openai
     export OPENROUTER_API_KEY=...      # your LLM
@@ -17,9 +17,9 @@ client = OpenAI(base_url="https://openrouter.ai/api/v1", api_key=os.environ["OPE
 
 def llm(prompt: str) -> str:
     response = client.chat.completions.create(
-        model="anthropic/claude-haiku-4.5",
-        temperature=0,
-        max_tokens=512,
+        model="anthropic/claude-haiku-5.5",
+        max_tokens=1024,
+        extra_body={"reasoning": {"enabled": False}},  # thinking off: faster, cheaper, same answers
         messages=[{"role": "user", "content": prompt}],
     )
     return response.choices[0].message.content or ""
@@ -46,7 +46,9 @@ detector = Detector(
 for query in ["what did Priya write recently?", "how does caching work?", "docs edited in October"]:
     f = detector.detect(query)
     where, params = f.to_sql(placeholder="?")
-    sql = "SELECT title FROM docs" + (f" WHERE {where}" if where else "") + f" {f.order_by_sql()}"
+    sql = "SELECT title FROM docs" + (f" WHERE {where}" if where else "")
+    if f.recency:  # a hint; here we simply order by the update date (see the README on reranking)
+        sql += f" ORDER BY edited_on {'DESC' if f.recency == 'newest' else 'ASC'}"
     rows = [r[0] for r in db.execute(sql, params)]
-    print(f"{query!r}\n  gate={f.trace.gate} llm_called={f.trace.llm_called}"
+    print(f"{query!r}\n  gate={f.trace.gate} llm_called={f.trace.llm_called} recency={f.recency}"
           f" search_text={f.cleaned_query!r}\n  {sql} {params}\n  -> {rows}\n")

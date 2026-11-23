@@ -1,0 +1,140 @@
+{
+  "summary": {
+    "date": "2026-11-22",
+    "commit": "2883641",
+    "model": "anthropic/claude-haiku-4.5",
+    "set": "holdout",
+    "prompt": "v3",
+    "label": "prompt-v3",
+    "cases": 15,
+    "filters_exact": 14,
+    "list_only_correct": 15,
+    "avg_prompt_tokens": 872,
+    "avg_completion_tokens": 77,
+    "median_seconds": 1.46
+  },
+  "results": [
+    {
+      "query": "tickets updated over the past two weeks",
+      "filters_ok": true,
+      "errors": [],
+      "list_only_ok": true,
+      "list_only": true,
+      "cleaned_query": ""
+    },
+    {
+      "query": "contracts drafted by Marco in 2024",
+      "filters_ok": true,
+      "errors": [],
+      "list_only_ok": true,
+      "list_only": false,
+      "cleaned_query": "contracts drafted"
+    },
+    {
+      "query": "notes edited today",
+      "filters_ok": true,
+      "errors": [],
+      "list_only_ok": true,
+      "list_only": true,
+      "cleaned_query": ""
+    },
+    {
+      "query": "the newest onboarding checklist",
+      "filters_ok": true,
+      "errors": [],
+      "list_only_ok": true,
+      "list_only": false,
+      "cleaned_query": "onboarding checklist"
+    },
+    {
+      "query": "which docs did Lena Fischer update this month",
+      "filters_ok": true,
+      "errors": [],
+      "list_only_ok": true,
+      "list_only": true,
+      "cleaned_query": ""
+    },
+    {
+      "query": "explain the Q4 planning process",
+      "filters_ok": true,
+      "errors": [],
+      "list_only_ok": true,
+      "list_only": false,
+      "cleaned_query": "explain the Q4 planning process"
+    },
+    {
+      "query": "summary of the 2026 hiring plan",
+      "filters_ok": true,
+      "errors": [],
+      "list_only_ok": true,
+      "list_only": false,
+      "cleaned_query": "summary of the 2026 hiring plan"
+    },
+    {
+      "query": "how do I submit an expense report",
+      "filters_ok": true,
+      "errors": [],
+      "list_only_ok": true,
+      "list_only": false,
+      "cleaned_query": "how do I submit an expense report"
+    },
+    {
+      "query": "pages created between June and August",
+      "filters_ok": true,
+      "errors": [],
+      "list_only_ok": true,
+      "list_only": true,
+      "cleaned_query": ""
+    },
+    {
+      "query": "runbooks Aiko changed last month",
+      "filters_ok": true,
+      "errors": [],
+      "list_only_ok": true,
+      "list_only": false,
+      "cleaned_query": "runbooks"
+    },
+    {
+      "query": "anything new on the search project since Monday",
+      "filters_ok": false,
+      "errors": [
+        "time: expected [('created_at|updated_at', '2026-11-16', None)], got [('updated_at', '2026-11-17', None)]"
+      ],
+      "list_only_ok": true,
+      "list_only": false,
+      "cleaned_query": "search project"
+    },
+    {
+      "query": "who approved the travel policy",
+      "filters_ok": true,
+      "errors": [],
+      "list_only_ok": true,
+      "list_only": false,
+      "cleaned_query": "who approved the travel policy"
+    },
+    {
+      "query": "specs written by Tomas or Priya about billing",
+      "filters_ok": true,
+      "errors": [],
+      "list_only_ok": true,
+      "list_only": false,
+      "cleaned_query": "specs about billing"
+    },
+    {
+      "query": "design docs created in May",
+      "filters_ok": true,
+      "errors": [],
+      "list_only_ok": true,
+      "list_only": false,
+      "cleaned_query": "design docs"
+    },
+    {
+      "query": "what did the security team write in March 2025",
+      "filters_ok": true,
+      "errors": [],
+      "list_only_ok": true,
+      "list_only": false,
+      "cleaned_query": "what did the security team write"
+    }
+  ]
+}

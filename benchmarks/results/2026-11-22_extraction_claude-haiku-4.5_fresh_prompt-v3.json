@@ -1,0 +1,140 @@
+{
+  "summary": {
+    "date": "2026-11-22",
+    "commit": "2883641",
+    "model": "anthropic/claude-haiku-4.5",
+    "set": "fresh",
+    "prompt": "v3",
+    "label": "prompt-v3",
+    "cases": 15,
+    "filters_exact": 14,
+    "list_only_correct": 15,
+    "avg_prompt_tokens": 872,
+    "avg_completion_tokens": 76,
+    "median_seconds": 1.82
+  },
+  "results": [
+    {
+      "query": "architecture notes Marco wrote in August",
+      "filters_ok": true,
+      "errors": [],
+      "list_only_ok": true,
+      "list_only": false,
+      "cleaned_query": "architecture notes"
+    },
+    {
+      "query": "show everything edited yesterday",
+      "filters_ok": true,
+      "errors": [],
+      "list_only_ok": true,
+      "list_only": true,
+      "cleaned_query": ""
+    },
+    {
+      "query": "pages created this year about compliance",
+      "filters_ok": true,
+      "errors": [],
+      "list_only_ok": true,
+      "list_only": false,
+      "cleaned_query": "compliance"
+    },
+    {
+      "query": "what did Aiko update last week in the onboarding guide",
+      "filters_ok": true,
+      "errors": [],
+      "list_only_ok": true,
+      "list_only": false,
+      "cleaned_query": "onboarding guide"
+    },
+    {
+      "query": "who maintains the release checklist",
+      "filters_ok": true,
+      "errors": [],
+      "list_only_ok": true,
+      "list_only": false,
+      "cleaned_query": "who maintains the release checklist"
+    },
+    {
+      "query": "the 2024 security audit findings",
+      "filters_ok": true,
+      "errors": [],
+      "list_only_ok": true,
+      "list_only": false,
+      "cleaned_query": "the 2024 security audit findings"
+    },
+    {
+      "query": "how does Q2 revenue recognition work",
+      "filters_ok": true,
+      "errors": [],
+      "list_only_ok": true,
+      "list_only": false,
+      "cleaned_query": "how does Q2 revenue recognition work"
+    },
+    {
+      "query": "the oldest notes on the data migration",
+      "filters_ok": true,
+      "errors": [],
+      "list_only_ok": true,
+      "list_only": false,
+      "cleaned_query": "notes on the data migration"
+    },
+    {
+      "query": "docs Lena Fischer created in 2025",
+      "filters_ok": true,
+      "errors": [],
+      "list_only_ok": true,
+      "list_only": true,
+      "cleaned_query": ""
+    },
+    {
+      "query": "postmortems from the last 90 days",
+      "filters_ok": true,
+      "errors": [],
+      "list_only_ok": true,
+      "list_only": false,
+      "cleaned_query": "postmortems"
+    },
+    {
+      "query": "what changed in the vendor policy since September",
+      "filters_ok": false,
+      "errors": [
+        "time: expected [('updated_at', '2026-09-01', None)], got [('updated_at', '2025-09-01', None)]"
+      ],
+      "list_only_ok": true,
+      "list_only": false,
+      "cleaned_query": "vendor policy"
+    },
+    {
+      "query": "pages written by Tomas before June",
+      "filters_ok": true,
+      "errors": [],
+      "list_only_ok": true,
+      "list_only": true,
+      "cleaned_query": ""
+    },
+    {
+      "query": "what is Marco's opinion on the caching proposal",
+      "filters_ok": true,
+      "errors": [],
+      "list_only_ok": true,
+      "list_only": false,
+      "cleaned_query": "what is Marco's opinion on the caching proposal"
+    },
+    {
+      "query": "the latest pricing FAQ",
+      "filters_ok": true,
+      "errors": [],
+      "list_only_ok": true,
+      "list_only": false,
+      "cleaned_query": "pricing FAQ"
+    },
+    {
+      "query": "notes edited in the past 48 hours",
+      "filters_ok": true,
+      "errors": [],
+      "list_only_ok": true,
+      "list_only": true,
+      "cleaned_query": ""
+    }
+  ]
+}

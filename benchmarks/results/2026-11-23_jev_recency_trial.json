@@ -1,0 +1,2026 @@
+[
+  {
+    "q": "what changed in the refund policy last week?",
+    "group": "main",
+    "expected": "neither",
+    "accept": [
+      "neither"
+    ],
+    "pick": "newest",
+    "p": 0.78,
+    "probs": {
+      "newest": 0.78,
+      "oldest": 0.0,
+      "neither": 0.22
+    },
+    "intent": 0.99,
+    "ms": 414
+  },
+  {
+    "q": "pages updated yesterday",
+    "group": "main",
+    "expected": "neither",
+    "accept": [
+      "neither"
+    ],
+    "pick": "neither",
+    "p": 0.89,
+    "probs": {
+      "newest": 0.11,
+      "oldest": 0.0,
+      "neither": 0.89
+    },
+    "intent": 1.0,
+    "ms": 302
+  },
+  {
+    "q": "onboarding docs edited this month",
+    "group": "main",
+    "expected": "neither",
+    "accept": [
+      "neither"
+    ],
+    "pick": "neither",
+    "p": 0.58,
+    "probs": {
+      "newest": 0.42,
+      "oldest": 0.0,
+      "neither": 0.58
+    },
+    "intent": 1.0,
+    "ms": 459
+  },
+  {
+    "q": "postmortems written in 2025",
+    "group": "main",
+    "expected": "neither",
+    "accept": [
+      "neither"
+    ],
+    "pick": "neither",
+    "p": 0.95,
+    "probs": {
+      "newest": 0.05,
+      "oldest": 0.0,
+      "neither": 0.95
+    },
+    "intent": 1.0,
+    "ms": 311
+  },
+  {
+    "q": "design reviews created since March",
+    "group": "main",
+    "expected": "neither",
+    "accept": [
+      "neither"
+    ],
+    "pick": "newest",
+    "p": 0.51,
+    "probs": {
+      "newest": 0.51,
+      "oldest": 0.0,
+      "neither": 0.49
+    },
+    "intent": 1.0,
+    "ms": 288
+  },
+  {
+    "q": "docs modified in October",
+    "group": "main",
+    "expected": "neither",
+    "accept": [
+      "neither"
+    ],
+    "pick": "neither",
+    "p": 0.99,
+    "probs": {
+      "newest": 0.01,
+      "oldest": 0.0,
+      "neither": 0.99
+    },
+    "intent": 1.0,
+    "ms": 341
+  },
+  {
+    "q": "meeting notes created in Q3",
+    "group": "main",
+    "expected": "neither",
+    "accept": [
+      "neither"
+    ],
+    "pick": "neither",
+    "p": 1.0,
+    "probs": {
+      "newest": 0.0,
+      "oldest": 0.0,
+      "neither": 1.0
+    },
+    "intent": 1.0,
+    "ms": 295
+  },
+  {
+    "q": "security policies updated in the last 30 days",
+    "group": "main",
+    "expected": "neither",
+    "accept": [
+      "neither"
+    ],
+    "pick": "newest",
+    "p": 0.83,
+    "probs": {
+      "newest": 0.83,
+      "oldest": 0.0,
+      "neither": 0.17
+    },
+    "intent": 1.0,
+    "ms": 289
+  },
+  {
+    "q": "notes edited before September",
+    "group": "main",
+    "expected": "neither",
+    "accept": [
+      "neither"
+    ],
+    "pick": "neither",
+    "p": 0.86,
+    "probs": {
+      "newest": 0.01,
+      "oldest": 0.13,
+      "neither": 0.86
+    },
+    "intent": 1.0,
+    "ms": 303
+  },
+  {
+    "q": "list documents created last month",
+    "group": "main",
+    "expected": "neither",
+    "accept": [
+      "neither"
+    ],
+    "pick": "neither",
+    "p": 0.98,
+    "probs": {
+      "newest": 0.02,
+      "oldest": 0.0,
+      "neither": 0.98
+    },
+    "intent": 1.0,
+    "ms": 325
+  },
+  {
+    "q": "latest deployment runbook",
+    "group": "main",
+    "expected": "newest",
+    "accept": [
+      "newest"
+    ],
+    "pick": "newest",
+    "p": 1.0,
+    "probs": {
+      "newest": 1.0,
+      "oldest": 0.0,
+      "neither": 0.0
+    },
+    "intent": 0.99,
+    "ms": 293
+  },
+  {
+    "q": "oldest page about the billing service",
+    "group": "main",
+    "expected": "oldest",
+    "accept": [
+      "oldest"
+    ],
+    "pick": "oldest",
+    "p": 1.0,
+    "probs": {
+      "newest": 0.0,
+      "oldest": 1.0,
+      "neither": 0.0
+    },
+    "intent": 1.0,
+    "ms": 294
+  },
+  {
+    "q": "pages written by Priya",
+    "group": "main",
+    "expected": "neither",
+    "accept": [
+      "neither"
+    ],
+    "pick": "neither",
+    "p": 1.0,
+    "probs": {
+      "newest": 0.0,
+      "oldest": 0.0,
+      "neither": 1.0
+    },
+    "intent": 1.0,
+    "ms": 287
+  },
+  {
+    "q": "specs created by Marco about payments",
+    "group": "main",
+    "expected": "neither",
+    "accept": [
+      "neither"
+    ],
+    "pick": "neither",
+    "p": 1.0,
+    "probs": {
+      "newest": 0.0,
+      "oldest": 0.0,
+      "neither": 1.0
+    },
+    "intent": 1.0,
+    "ms": 361
+  },
+  {
+    "q": "did Aiko write anything on caching?",
+    "group": "main",
+    "expected": "neither",
+    "accept": [
+      "neither"
+    ],
+    "pick": "neither",
+    "p": 1.0,
+    "probs": {
+      "newest": 0.0,
+      "oldest": 0.0,
+      "neither": 1.0
+    },
+    "intent": 0.99,
+    "ms": 306
+  },
+  {
+    "q": "has Lena Fischer edited the style guide",
+    "group": "main",
+    "expected": "neither",
+    "accept": [
+      "neither"
+    ],
+    "pick": "neither",
+    "p": 0.98,
+    "probs": {
+      "newest": 0.02,
+      "oldest": 0.0,
+      "neither": 0.98
+    },
+    "intent": 0.99,
+    "ms": 284
+  },
+  {
+    "q": "docs by Tomas on search ranking",
+    "group": "main",
+    "expected": "neither",
+    "accept": [
+      "neither"
+    ],
+    "pick": "neither",
+    "p": 1.0,
+    "probs": {
+      "newest": 0.0,
+      "oldest": 0.0,
+      "neither": 1.0
+    },
+    "intent": 0.99,
+    "ms": 324
+  },
+  {
+    "q": "Priya's notes on the vendor review",
+    "group": "main",
+    "expected": "neither",
+    "accept": [
+      "neither"
+    ],
+    "pick": "neither",
+    "p": 1.0,
+    "probs": {
+      "newest": 0.0,
+      "oldest": 0.0,
+      "neither": 1.0
+    },
+    "intent": 0.96,
+    "ms": 296
+  },
+  {
+    "q": "anything Priya put together on onboarding?",
+    "group": "main",
+    "expected": "neither",
+    "accept": [
+      "neither"
+    ],
+    "pick": "neither",
+    "p": 1.0,
+    "probs": {
+      "newest": 0.0,
+      "oldest": 0.0,
+      "neither": 1.0
+    },
+    "intent": 1.0,
+    "ms": 299
+  },
+  {
+    "q": "show me Marco's stuff about the billing rewrite",
+    "group": "main",
+    "expected": "neither",
+    "accept": [
+      "neither"
+    ],
+    "pick": "neither",
+    "p": 1.0,
+    "probs": {
+      "newest": 0.0,
+      "oldest": 0.0,
+      "neither": 1.0
+    },
+    "intent": 1.0,
+    "ms": 329
+  },
+  {
+    "q": "pages written by Priya or Marco",
+    "group": "main",
+    "expected": "neither",
+    "accept": [
+      "neither"
+    ],
+    "pick": "neither",
+    "p": 1.0,
+    "probs": {
+      "newest": 0.0,
+      "oldest": 0.0,
+      "neither": 1.0
+    },
+    "intent": 1.0,
+    "ms": 293
+  },
+  {
+    "q": "pricing docs Priya edited last week",
+    "group": "main",
+    "expected": "neither",
+    "accept": [
+      "neither"
+    ],
+    "pick": "neither",
+    "p": 0.99,
+    "probs": {
+      "newest": 0.01,
+      "oldest": 0.0,
+      "neither": 0.99
+    },
+    "intent": 1.0,
+    "ms": 303
+  },
+  {
+    "q": "pages Priya created this week",
+    "group": "main",
+    "expected": "neither",
+    "accept": [
+      "neither"
+    ],
+    "pick": "neither",
+    "p": 0.78,
+    "probs": {
+      "newest": 0.22,
+      "oldest": 0.0,
+      "neither": 0.78
+    },
+    "intent": 1.0,
+    "ms": 292
+  },
+  {
+    "q": "what did Marco change in the API docs yesterday",
+    "group": "main",
+    "expected": "neither",
+    "accept": [
+      "neither"
+    ],
+    "pick": "neither",
+    "p": 0.54,
+    "probs": {
+      "newest": 0.46,
+      "oldest": 0.0,
+      "neither": 0.54
+    },
+    "intent": 1.0,
+    "ms": 285
+  },
+  {
+    "q": "most recent docs by Aiko",
+    "group": "main",
+    "expected": "newest",
+    "accept": [
+      "newest"
+    ],
+    "pick": "newest",
+    "p": 1.0,
+    "probs": {
+      "newest": 1.0,
+      "oldest": 0.0,
+      "neither": 0.0
+    },
+    "intent": 1.0,
+    "ms": 291
+  },
+  {
+    "q": "what is our refund policy?",
+    "group": "main",
+    "expected": "neither",
+    "accept": [
+      "neither"
+    ],
+    "pick": "neither",
+    "p": 0.98,
+    "probs": {
+      "newest": 0.02,
+      "oldest": 0.0,
+      "neither": 0.98
+    },
+    "intent": 0.0,
+    "ms": 290
+  },
+  {
+    "q": "what is Priya's role on the payments team",
+    "group": "main",
+    "expected": "neither",
+    "accept": [
+      "neither"
+    ],
+    "pick": "neither",
+    "p": 0.99,
+    "probs": {
+      "newest": 0.01,
+      "oldest": 0.0,
+      "neither": 0.99
+    },
+    "intent": 0.03,
+    "ms": 299
+  },
+  {
+    "q": "how does the 2025 pricing model work",
+    "group": "main",
+    "expected": "neither",
+    "accept": [
+      "neither"
+    ],
+    "pick": "neither",
+    "p": 0.76,
+    "probs": {
+      "newest": 0.24,
+      "oldest": 0.0,
+      "neither": 0.76
+    },
+    "intent": 0.14,
+    "ms": 285
+  },
+  {
+    "q": "who is responsible for approving vendor contracts",
+    "group": "main",
+    "expected": "neither",
+    "accept": [
+      "neither"
+    ],
+    "pick": "neither",
+    "p": 1.0,
+    "probs": {
+      "newest": 0.0,
+      "oldest": 0.0,
+      "neither": 1.0
+    },
+    "intent": 0.16,
+    "ms": 289
+  },
+  {
+    "q": "who wrote the incident response playbook?",
+    "group": "main",
+    "expected": "neither",
+    "accept": [
+      "neither"
+    ],
+    "pick": "neither",
+    "p": 0.99,
+    "probs": {
+      "newest": 0.0,
+      "oldest": 0.01,
+      "neither": 0.99
+    },
+    "intent": 0.99,
+    "ms": 285
+  },
+  {
+    "q": "tickets updated over the past two weeks",
+    "group": "holdout",
+    "expected": "neither",
+    "accept": [
+      "neither"
+    ],
+    "pick": "newest",
+    "p": 0.56,
+    "probs": {
+      "newest": 0.56,
+      "oldest": 0.0,
+      "neither": 0.44
+    },
+    "intent": 1.0,
+    "ms": 467
+  },
+  {
+    "q": "contracts drafted by Marco in 2024",
+    "group": "holdout",
+    "expected": "neither",
+    "accept": [
+      "neither"
+    ],
+    "pick": "neither",
+    "p": 0.99,
+    "probs": {
+      "newest": 0.01,
+      "oldest": 0.0,
+      "neither": 0.99
+    },
+    "intent": 1.0,
+    "ms": 287
+  },
+  {
+    "q": "notes edited today",
+    "group": "holdout",
+    "expected": "neither",
+    "accept": [
+      "neither"
+    ],
+    "pick": "newest",
+    "p": 0.7,
+    "probs": {
+      "newest": 0.7,
+      "oldest": 0.0,
+      "neither": 0.3
+    },
+    "intent": 1.0,
+    "ms": 288
+  },
+  {
+    "q": "the newest onboarding checklist",
+    "group": "holdout",
+    "expected": "newest",
+    "accept": [
+      "newest"
+    ],
+    "pick": "newest",
+    "p": 1.0,
+    "probs": {
+      "newest": 1.0,
+      "oldest": 0.0,
+      "neither": 0.0
+    },
+    "intent": 1.0,
+    "ms": 343
+  },
+  {
+    "q": "which docs did Lena Fischer update this month",
+    "group": "holdout",
+    "expected": "neither",
+    "accept": [
+      "neither"
+    ],
+    "pick": "neither",
+    "p": 0.85,
+    "probs": {
+      "newest": 0.15,
+      "oldest": 0.0,
+      "neither": 0.85
+    },
+    "intent": 1.0,
+    "ms": 292
+  },
+  {
+    "q": "explain the Q4 planning process",
+    "group": "holdout",
+    "expected": "neither",
+    "accept": [
+      "neither"
+    ],
+    "pick": "neither",
+    "p": 1.0,
+    "probs": {
+      "newest": 0.0,
+      "oldest": 0.0,
+      "neither": 1.0
+    },
+    "intent": 0.01,
+    "ms": 318
+  },
+  {
+    "q": "summary of the 2026 hiring plan",
+    "group": "holdout",
+    "expected": "neither",
+    "accept": [
+      "neither"
+    ],
+    "pick": "neither",
+    "p": 0.97,
+    "probs": {
+      "newest": 0.03,
+      "oldest": 0.0,
+      "neither": 0.97
+    },
+    "intent": 0.14,
+    "ms": 312
+  },
+  {
+    "q": "how do I submit an expense report",
+    "group": "holdout",
+    "expected": "neither",
+    "accept": [
+      "neither"
+    ],
+    "pick": "neither",
+    "p": 1.0,
+    "probs": {
+      "newest": 0.0,
+      "oldest": 0.0,
+      "neither": 1.0
+    },
+    "intent": 0.0,
+    "ms": 292
+  },
+  {
+    "q": "pages created between June and August",
+    "group": "holdout",
+    "expected": "neither",
+    "accept": [
+      "neither"
+    ],
+    "pick": "neither",
+    "p": 1.0,
+    "probs": {
+      "newest": 0.0,
+      "oldest": 0.0,
+      "neither": 1.0
+    },
+    "intent": 1.0,
+    "ms": 321
+  },
+  {
+    "q": "runbooks Aiko changed last month",
+    "group": "holdout",
+    "expected": "neither",
+    "accept": [
+      "neither"
+    ],
+    "pick": "neither",
+    "p": 0.6,
+    "probs": {
+      "newest": 0.4,
+      "oldest": 0.0,
+      "neither": 0.6
+    },
+    "intent": 1.0,
+    "ms": 307
+  },
+  {
+    "q": "anything new on the search project since Monday",
+    "group": "holdout",
+    "expected": "neither",
+    "accept": [
+      "neither"
+    ],
+    "pick": "newest",
+    "p": 1.0,
+    "probs": {
+      "newest": 1.0,
+      "oldest": 0.0,
+      "neither": 0.0
+    },
+    "intent": 1.0,
+    "ms": 309
+  },
+  {
+    "q": "who approved the travel policy",
+    "group": "holdout",
+    "expected": "neither",
+    "accept": [
+      "neither"
+    ],
+    "pick": "neither",
+    "p": 0.97,
+    "probs": {
+      "newest": 0.01,
+      "oldest": 0.02,
+      "neither": 0.97
+    },
+    "intent": 0.89,
+    "ms": 292
+  },
+  {
+    "q": "specs written by Tomas or Priya about billing",
+    "group": "holdout",
+    "expected": "neither",
+    "accept": [
+      "neither"
+    ],
+    "pick": "neither",
+    "p": 1.0,
+    "probs": {
+      "newest": 0.0,
+      "oldest": 0.0,
+      "neither": 1.0
+    },
+    "intent": 1.0,
+    "ms": 291
+  },
+  {
+    "q": "design docs created in May",
+    "group": "holdout",
+    "expected": "neither",
+    "accept": [
+      "neither"
+    ],
+    "pick": "neither",
+    "p": 1.0,
+    "probs": {
+      "newest": 0.0,
+      "oldest": 0.0,
+      "neither": 1.0
+    },
+    "intent": 1.0,
+    "ms": 288
+  },
+  {
+    "q": "what did the security team write in March 2025",
+    "group": "holdout",
+    "expected": "neither",
+    "accept": [
+      "neither"
+    ],
+    "pick": "neither",
+    "p": 1.0,
+    "probs": {
+      "newest": 0.0,
+      "oldest": 0.0,
+      "neither": 1.0
+    },
+    "intent": 1.0,
+    "ms": 289
+  },
+  {
+    "q": "architecture notes Marco wrote in August",
+    "group": "fresh",
+    "expected": "neither",
+    "accept": [
+      "neither"
+    ],
+    "pick": "neither",
+    "p": 1.0,
+    "probs": {
+      "newest": 0.0,
+      "oldest": 0.0,
+      "neither": 1.0
+    },
+    "intent": 1.0,
+    "ms": 284
+  },
+  {
+    "q": "show everything edited yesterday",
+    "group": "fresh",
+    "expected": "neither",
+    "accept": [
+      "neither"
+    ],
+    "pick": "neither",
+    "p": 0.97,
+    "probs": {
+      "newest": 0.03,
+      "oldest": 0.0,
+      "neither": 0.97
+    },
+    "intent": 1.0,
+    "ms": 286
+  },
+  {
+    "q": "pages created this year about compliance",
+    "group": "fresh",
+    "expected": "neither",
+    "accept": [
+      "neither"
+    ],
+    "pick": "newest",
+    "p": 0.64,
+    "probs": {
+      "newest": 0.64,
+      "oldest": 0.0,
+      "neither": 0.36
+    },
+    "intent": 1.0,
+    "ms": 286
+  },
+  {
+    "q": "what did Aiko update last week in the onboarding guide",
+    "group": "fresh",
+    "expected": "neither",
+    "accept": [
+      "neither"
+    ],
+    "pick": "neither",
+    "p": 0.71,
+    "probs": {
+      "newest": 0.29,
+      "oldest": 0.0,
+      "neither": 0.71
+    },
+    "intent": 0.99,
+    "ms": 301
+  },
+  {
+    "q": "who maintains the release checklist",
+    "group": "fresh",
+    "expected": "neither",
+    "accept": [
+      "neither"
+    ],
+    "pick": "neither",
+    "p": 0.99,
+    "probs": {
+      "newest": 0.01,
+      "oldest": 0.0,
+      "neither": 0.99
+    },
+    "intent": 0.91,
+    "ms": 441
+  },
+  {
+    "q": "the 2024 security audit findings",
+    "group": "fresh",
+    "expected": "neither",
+    "accept": [
+      "neither"
+    ],
+    "pick": "neither",
+    "p": 0.95,
+    "probs": {
+      "newest": 0.05,
+      "oldest": 0.0,
+      "neither": 0.95
+    },
+    "intent": 0.84,
+    "ms": 298
+  },
+  {
+    "q": "how does Q2 revenue recognition work",
+    "group": "fresh",
+    "expected": "neither",
+    "accept": [
+      "neither"
+    ],
+    "pick": "neither",
+    "p": 1.0,
+    "probs": {
+      "newest": 0.0,
+      "oldest": 0.0,
+      "neither": 1.0
+    },
+    "intent": 0.04,
+    "ms": 292
+  },
+  {
+    "q": "the oldest notes on the data migration",
+    "group": "fresh",
+    "expected": "oldest",
+    "accept": [
+      "oldest"
+    ],
+    "pick": "oldest",
+    "p": 1.0,
+    "probs": {
+      "newest": 0.0,
+      "oldest": 1.0,
+      "neither": 0.0
+    },
+    "intent": 1.0,
+    "ms": 285
+  },
+  {
+    "q": "docs Lena Fischer created in 2025",
+    "group": "fresh",
+    "expected": "neither",
+    "accept": [
+      "neither"
+    ],
+    "pick": "neither",
+    "p": 0.98,
+    "probs": {
+      "newest": 0.02,
+      "oldest": 0.0,
+      "neither": 0.98
+    },
+    "intent": 1.0,
+    "ms": 287
+  },
+  {
+    "q": "postmortems from the last 90 days",
+    "group": "fresh",
+    "expected": "neither",
+    "accept": [
+      "neither"
+    ],
+    "pick": "neither",
+    "p": 0.6,
+    "probs": {
+      "newest": 0.4,
+      "oldest": 0.0,
+      "neither": 0.6
+    },
+    "intent": 1.0,
+    "ms": 285
+  },
+  {
+    "q": "what changed in the vendor policy since September",
+    "group": "fresh",
+    "expected": "neither",
+    "accept": [
+      "neither"
+    ],
+    "pick": "newest",
+    "p": 0.92,
+    "probs": {
+      "newest": 0.92,
+      "oldest": 0.0,
+      "neither": 0.08
+    },
+    "intent": 0.99,
+    "ms": 287
+  },
+  {
+    "q": "pages written by Tomas before June",
+    "group": "fresh",
+    "expected": "neither",
+    "accept": [
+      "neither"
+    ],
+    "pick": "neither",
+    "p": 0.91,
+    "probs": {
+      "newest": 0.0,
+      "oldest": 0.09,
+      "neither": 0.91
+    },
+    "intent": 1.0,
+    "ms": 284
+  },
+  {
+    "q": "what is Marco's opinion on the caching proposal",
+    "group": "fresh",
+    "expected": "neither",
+    "accept": [
+      "neither"
+    ],
+    "pick": "neither",
+    "p": 1.0,
+    "probs": {
+      "newest": 0.0,
+      "oldest": 0.0,
+      "neither": 1.0
+    },
+    "intent": 0.48,
+    "ms": 295
+  },
+  {
+    "q": "the latest pricing FAQ",
+    "group": "fresh",
+    "expected": "newest",
+    "accept": [
+      "newest"
+    ],
+    "pick": "newest",
+    "p": 1.0,
+    "probs": {
+      "newest": 1.0,
+      "oldest": 0.0,
+      "neither": 0.0
+    },
+    "intent": 1.0,
+    "ms": 288
+  },
+  {
+    "q": "notes edited in the past 48 hours",
+    "group": "fresh",
+    "expected": "neither",
+    "accept": [
+      "neither"
+    ],
+    "pick": "newest",
+    "p": 0.87,
+    "probs": {
+      "newest": 0.87,
+      "oldest": 0.0,
+      "neither": 0.13
+    },
+    "intent": 1.0,
+    "ms": 283
+  },
+  {
+    "q": "what was added to the API guide since August",
+    "group": "fresh2",
+    "expected": "neither",
+    "accept": [
+      "neither"
+    ],
+    "pick": "newest",
+    "p": 0.91,
+    "probs": {
+      "newest": 0.91,
+      "oldest": 0.0,
+      "neither": 0.09
+    },
+    "intent": 1.0,
+    "ms": 286
+  },
+  {
+    "q": "reports created before March",
+    "group": "fresh2",
+    "expected": "neither",
+    "accept": [
+      "neither"
+    ],
+    "pick": "oldest",
+    "p": 0.54,
+    "probs": {
+      "newest": 0.0,
+      "oldest": 0.54,
+      "neither": 0.46
+    },
+    "intent": 1.0,
+    "ms": 297
+  },
+  {
+    "q": "pages created since January",
+    "group": "fresh2",
+    "expected": "neither",
+    "accept": [
+      "neither"
+    ],
+    "pick": "newest",
+    "p": 0.81,
+    "probs": {
+      "newest": 0.81,
+      "oldest": 0.0,
+      "neither": 0.19
+    },
+    "intent": 1.0,
+    "ms": 293
+  },
+  {
+    "q": "what is Lena's view on remote work",
+    "group": "fresh2",
+    "expected": "neither",
+    "accept": [
+      "neither"
+    ],
+    "pick": "neither",
+    "p": 1.0,
+    "probs": {
+      "newest": 0.0,
+      "oldest": 0.0,
+      "neither": 1.0
+    },
+    "intent": 0.37,
+    "ms": 420
+  },
+  {
+    "q": "what does Tomas think about the new pricing",
+    "group": "fresh2",
+    "expected": "neither",
+    "accept": [
+      "neither"
+    ],
+    "pick": "neither",
+    "p": 0.59,
+    "probs": {
+      "newest": 0.41,
+      "oldest": 0.0,
+      "neither": 0.59
+    },
+    "intent": 0.31,
+    "ms": 289
+  },
+  {
+    "q": "design docs updated since December",
+    "group": "fresh2",
+    "expected": "neither",
+    "accept": [
+      "neither"
+    ],
+    "pick": "newest",
+    "p": 0.86,
+    "probs": {
+      "newest": 0.86,
+      "oldest": 0.0,
+      "neither": 0.14
+    },
+    "intent": 1.0,
+    "ms": 293
+  },
+  {
+    "q": "incident notes created in December",
+    "group": "fresh2",
+    "expected": "neither",
+    "accept": [
+      "neither"
+    ],
+    "pick": "neither",
+    "p": 1.0,
+    "probs": {
+      "newest": 0.0,
+      "oldest": 0.0,
+      "neither": 1.0
+    },
+    "intent": 1.0,
+    "ms": 428
+  },
+  {
+    "q": "specs Marco edited since the start of October",
+    "group": "fresh2",
+    "expected": "neither",
+    "accept": [
+      "neither"
+    ],
+    "pick": "neither",
+    "p": 0.63,
+    "probs": {
+      "newest": 0.37,
+      "oldest": 0.0,
+      "neither": 0.63
+    },
+    "intent": 1.0,
+    "ms": 287
+  },
+  {
+    "q": "pages created last year",
+    "group": "fresh2",
+    "expected": "neither",
+    "accept": [
+      "neither"
+    ],
+    "pick": "neither",
+    "p": 0.97,
+    "probs": {
+      "newest": 0.02,
+      "oldest": 0.01,
+      "neither": 0.97
+    },
+    "intent": 1.0,
+    "ms": 294
+  },
+  {
+    "q": "who leads the payments team",
+    "group": "fresh2",
+    "expected": "neither",
+    "accept": [
+      "neither"
+    ],
+    "pick": "neither",
+    "p": 0.85,
+    "probs": {
+      "newest": 0.15,
+      "oldest": 0.0,
+      "neither": 0.85
+    },
+    "intent": 0.16,
+    "ms": 285
+  },
+  {
+    "q": "notes from 2023 about the data warehouse",
+    "group": "fresh2",
+    "expected": "neither",
+    "accept": [
+      "neither"
+    ],
+    "pick": "neither",
+    "p": 0.99,
+    "probs": {
+      "newest": 0.01,
+      "oldest": 0.0,
+      "neither": 0.99
+    },
+    "intent": 1.0,
+    "ms": 293
+  },
+  {
+    "q": "the most recent compliance checklist",
+    "group": "fresh2",
+    "expected": "newest",
+    "accept": [
+      "newest"
+    ],
+    "pick": "newest",
+    "p": 1.0,
+    "probs": {
+      "newest": 1.0,
+      "oldest": 0.0,
+      "neither": 0.0
+    },
+    "intent": 1.0,
+    "ms": 294
+  },
+  {
+    "q": "Priya's latest draft of the launch plan",
+    "group": "fresh2",
+    "expected": "newest",
+    "accept": [
+      "newest"
+    ],
+    "pick": "newest",
+    "p": 1.0,
+    "probs": {
+      "newest": 1.0,
+      "oldest": 0.0,
+      "neither": 0.0
+    },
+    "intent": 1.0,
+    "ms": 301
+  },
+  {
+    "q": "how did the 2023 migration go",
+    "group": "fresh2",
+    "expected": "neither",
+    "accept": [
+      "neither"
+    ],
+    "pick": "neither",
+    "p": 0.96,
+    "probs": {
+      "newest": 0.04,
+      "oldest": 0.0,
+      "neither": 0.96
+    },
+    "intent": 0.36,
+    "ms": 291
+  },
+  {
+    "q": "what has Marco written since April",
+    "group": "fresh2",
+    "expected": "neither",
+    "accept": [
+      "neither"
+    ],
+    "pick": "neither",
+    "p": 0.82,
+    "probs": {
+      "newest": 0.18,
+      "oldest": 0.0,
+      "neither": 0.82
+    },
+    "intent": 1.0,
+    "ms": 292
+  },
+  {
+    "q": "show me pages updated yesterday",
+    "group": "gates",
+    "expected": "neither",
+    "accept": [
+      "neither"
+    ],
+    "pick": "neither",
+    "p": 0.96,
+    "probs": {
+      "newest": 0.04,
+      "oldest": 0.0,
+      "neither": 0.96
+    },
+    "intent": 1.0,
+    "ms": 322
+  },
+  {
+    "q": "release notes from the past 3 days",
+    "group": "gates",
+    "expected": "neither",
+    "accept": [
+      "neither"
+    ],
+    "pick": "newest",
+    "p": 0.85,
+    "probs": {
+      "newest": 0.85,
+      "oldest": 0.0,
+      "neither": 0.15
+    },
+    "intent": 1.0,
+    "ms": 296
+  },
+  {
+    "q": "any new incident reports today?",
+    "group": "gates",
+    "expected": "neither",
+    "accept": [
+      "neither"
+    ],
+    "pick": "newest",
+    "p": 0.99,
+    "probs": {
+      "newest": 0.99,
+      "oldest": 0.0,
+      "neither": 0.01
+    },
+    "intent": 1.0,
+    "ms": 329
+  },
+  {
+    "q": "what's new in the pricing wiki",
+    "group": "gates",
+    "expected": "newest",
+    "accept": [
+      "newest"
+    ],
+    "pick": "newest",
+    "p": 1.0,
+    "probs": {
+      "newest": 1.0,
+      "oldest": 0.0,
+      "neither": 0.0
+    },
+    "intent": 0.97,
+    "ms": 422
+  },
+  {
+    "q": "latest version of the API rate limit doc",
+    "group": "gates",
+    "expected": "newest",
+    "accept": [
+      "newest"
+    ],
+    "pick": "newest",
+    "p": 1.0,
+    "probs": {
+      "newest": 1.0,
+      "oldest": 0.0,
+      "neither": 0.0
+    },
+    "intent": 0.99,
+    "ms": 365
+  },
+  {
+    "q": "most recent sprint retrospective",
+    "group": "gates",
+    "expected": "newest",
+    "accept": [
+      "newest"
+    ],
+    "pick": "newest",
+    "p": 1.0,
+    "probs": {
+      "newest": 1.0,
+      "oldest": 0.0,
+      "neither": 0.0
+    },
+    "intent": 0.99,
+    "ms": 284
+  },
+  {
+    "q": "design reviews since March",
+    "group": "gates",
+    "expected": "neither",
+    "accept": [
+      "neither"
+    ],
+    "pick": "neither",
+    "p": 0.83,
+    "probs": {
+      "newest": 0.16,
+      "oldest": 0.01,
+      "neither": 0.83
+    },
+    "intent": 1.0,
+    "ms": 442
+  },
+  {
+    "q": "meeting notes from Q3",
+    "group": "gates",
+    "expected": "neither",
+    "accept": [
+      "neither"
+    ],
+    "pick": "neither",
+    "p": 1.0,
+    "probs": {
+      "newest": 0.0,
+      "oldest": 0.0,
+      "neither": 1.0
+    },
+    "intent": 0.99,
+    "ms": 284
+  },
+  {
+    "q": "docs modified after 2026-10-01",
+    "group": "gates",
+    "expected": "neither",
+    "accept": [
+      "neither"
+    ],
+    "pick": "newest",
+    "p": 0.53,
+    "probs": {
+      "newest": 0.53,
+      "oldest": 0.0,
+      "neither": 0.47
+    },
+    "intent": 1.0,
+    "ms": 317
+  },
+  {
+    "q": "roadmap pages created 2 weeks ago",
+    "group": "gates",
+    "expected": "neither",
+    "accept": [
+      "neither"
+    ],
+    "pick": "neither",
+    "p": 0.97,
+    "probs": {
+      "newest": 0.03,
+      "oldest": 0.0,
+      "neither": 0.97
+    },
+    "intent": 1.0,
+    "ms": 293
+  },
+  {
+    "q": "what did the team decide during last quarter",
+    "group": "gates",
+    "expected": "neither",
+    "accept": [
+      "neither"
+    ],
+    "pick": "neither",
+    "p": 0.98,
+    "probs": {
+      "newest": 0.02,
+      "oldest": 0.0,
+      "neither": 0.98
+    },
+    "intent": 0.87,
+    "ms": 288
+  },
+  {
+    "q": "security policies updated recently",
+    "group": "gates",
+    "expected": "newest",
+    "accept": [
+      "newest"
+    ],
+    "pick": "newest",
+    "p": 0.99,
+    "probs": {
+      "newest": 0.99,
+      "oldest": 0.0,
+      "neither": 0.01
+    },
+    "intent": 1.0,
+    "ms": 289
+  },
+  {
+    "q": "hiring plan changes in the previous 6 months",
+    "group": "gates",
+    "expected": "neither",
+    "accept": [
+      "neither"
+    ],
+    "pick": "newest",
+    "p": 0.62,
+    "probs": {
+      "newest": 0.62,
+      "oldest": 0.0,
+      "neither": 0.38
+    },
+    "intent": 1.0,
+    "ms": 289
+  },
+  {
+    "q": "notes added before Monday",
+    "group": "gates",
+    "expected": "neither",
+    "accept": [
+      "neither"
+    ],
+    "pick": "neither",
+    "p": 0.92,
+    "probs": {
+      "newest": 0.02,
+      "oldest": 0.06,
+      "neither": 0.92
+    },
+    "intent": 1.0,
+    "ms": 322
+  },
+  {
+    "q": "what has changed in the deployment runbook",
+    "group": "gates",
+    "expected": "newest",
+    "accept": [
+      "newest",
+      "neither"
+    ],
+    "pick": "newest",
+    "p": 0.99,
+    "probs": {
+      "newest": 0.99,
+      "oldest": 0.0,
+      "neither": 0.01
+    },
+    "intent": 0.49,
+    "ms": 537
+  },
+  {
+    "q": "status updates between January and March",
+    "group": "gates",
+    "expected": "neither",
+    "accept": [
+      "neither"
+    ],
+    "pick": "neither",
+    "p": 1.0,
+    "probs": {
+      "newest": 0.0,
+      "oldest": 0.0,
+      "neither": 1.0
+    },
+    "intent": 1.0,
+    "ms": 311
+  },
+  {
+    "q": "who owns the data retention policy",
+    "group": "gates",
+    "expected": "neither",
+    "accept": [
+      "neither"
+    ],
+    "pick": "neither",
+    "p": 1.0,
+    "probs": {
+      "newest": 0.0,
+      "oldest": 0.0,
+      "neither": 1.0
+    },
+    "intent": 0.93,
+    "ms": 306
+  },
+  {
+    "q": "who is the author of the pricing FAQ",
+    "group": "gates",
+    "expected": "neither",
+    "accept": [
+      "neither"
+    ],
+    "pick": "neither",
+    "p": 1.0,
+    "probs": {
+      "newest": 0.0,
+      "oldest": 0.0,
+      "neither": 1.0
+    },
+    "intent": 0.99,
+    "ms": 285
+  },
+  {
+    "q": "tickets added by Marco",
+    "group": "gates",
+    "expected": "neither",
+    "accept": [
+      "neither"
+    ],
+    "pick": "neither",
+    "p": 0.99,
+    "probs": {
+      "newest": 0.01,
+      "oldest": 0.0,
+      "neither": 0.99
+    },
+    "intent": 1.0,
+    "ms": 290
+  },
+  {
+    "q": "everything authored by the platform team",
+    "group": "gates",
+    "expected": "neither",
+    "accept": [
+      "neither"
+    ],
+    "pick": "neither",
+    "p": 1.0,
+    "probs": {
+      "newest": 0.0,
+      "oldest": 0.0,
+      "neither": 1.0
+    },
+    "intent": 1.0,
+    "ms": 292
+  },
+  {
+    "q": "who updated the SLA document",
+    "group": "gates",
+    "expected": "neither",
+    "accept": [
+      "neither"
+    ],
+    "pick": "neither",
+    "p": 0.52,
+    "probs": {
+      "newest": 0.48,
+      "oldest": 0.0,
+      "neither": 0.52
+    },
+    "intent": 0.99,
+    "ms": 300
+  },
+  {
+    "q": "what has been going on with the pricing page these days",
+    "group": "gates",
+    "expected": "newest",
+    "accept": [
+      "newest"
+    ],
+    "pick": "newest",
+    "p": 1.0,
+    "probs": {
+      "newest": 1.0,
+      "oldest": 0.0,
+      "neither": 0.0
+    },
+    "intent": 0.8,
+    "ms": 287
+  },
+  {
+    "q": "pages Aiko touched around the launch",
+    "group": "gates",
+    "expected": "neither",
+    "accept": [
+      "neither"
+    ],
+    "pick": "neither",
+    "p": 0.97,
+    "probs": {
+      "newest": 0.01,
+      "oldest": 0.02,
+      "neither": 0.97
+    },
+    "intent": 0.99,
+    "ms": 290
+  },
+  {
+    "q": "fresh material on the search ranking project",
+    "group": "gates",
+    "expected": "newest",
+    "accept": [
+      "newest"
+    ],
+    "pick": "newest",
+    "p": 1.0,
+    "probs": {
+      "newest": 1.0,
+      "oldest": 0.0,
+      "neither": 0.0
+    },
+    "intent": 0.99,
+    "ms": 287
+  },
+  {
+    "q": "the most up to date runbook for deployments",
+    "group": "gates",
+    "expected": "newest",
+    "accept": [
+      "newest"
+    ],
+    "pick": "newest",
+    "p": 1.0,
+    "probs": {
+      "newest": 1.0,
+      "oldest": 0.0,
+      "neither": 0.0
+    },
+    "intent": 1.0,
+    "ms": 291
+  },
+  {
+    "q": "notes Lena jotted down about the vendor review",
+    "group": "gates",
+    "expected": "neither",
+    "accept": [
+      "neither"
+    ],
+    "pick": "neither",
+    "p": 1.0,
+    "probs": {
+      "newest": 0.0,
+      "oldest": 0.0,
+      "neither": 1.0
+    },
+    "intent": 0.6,
+    "ms": 321
+  },
+  {
+    "q": "how the security policy was reworked over the summer",
+    "group": "gates",
+    "expected": "neither",
+    "accept": [
+      "neither"
+    ],
+    "pick": "neither",
+    "p": 0.91,
+    "probs": {
+      "newest": 0.09,
+      "oldest": 0.0,
+      "neither": 0.91
+    },
+    "intent": 0.95,
+    "ms": 426
+  },
+  {
+    "q": "how do I rotate an API key",
+    "group": "gates",
+    "expected": "neither",
+    "accept": [
+      "neither"
+    ],
+    "pick": "neither",
+    "p": 1.0,
+    "probs": {
+      "newest": 0.0,
+      "oldest": 0.0,
+      "neither": 1.0
+    },
+    "intent": 0.0,
+    "ms": 286
+  },
+  {
+    "q": "explain the billing service architecture",
+    "group": "gates",
+    "expected": "neither",
+    "accept": [
+      "neither"
+    ],
+    "pick": "neither",
+    "p": 1.0,
+    "probs": {
+      "newest": 0.0,
+      "oldest": 0.0,
+      "neither": 1.0
+    },
+    "intent": 0.0,
+    "ms": 320
+  },
+  {
+    "q": "what are the steps in the onboarding checklist",
+    "group": "gates",
+    "expected": "neither",
+    "accept": [
+      "neither"
+    ],
+    "pick": "neither",
+    "p": 1.0,
+    "probs": {
+      "newest": 0.0,
+      "oldest": 0.0,
+      "neither": 1.0
+    },
+    "intent": 0.0,
+    "ms": 294
+  },
+  {
+    "q": "how does search ranking work",
+    "group": "gates",
+    "expected": "neither",
+    "accept": [
+      "neither"
+    ],
+    "pick": "neither",
+    "p": 1.0,
+    "probs": {
+      "newest": 0.0,
+      "oldest": 0.0,
+      "neither": 1.0
+    },
+    "intent": 0.0,
+    "ms": 287
+  },
+  {
+    "q": "what is the data retention period for logs",
+    "group": "gates",
+    "expected": "neither",
+    "accept": [
+      "neither"
+    ],
+    "pick": "neither",
+    "p": 1.0,
+    "probs": {
+      "newest": 0.0,
+      "oldest": 0.0,
+      "neither": 1.0
+    },
+    "intent": 0.21,
+    "ms": 288
+  },
+  {
+    "q": "list the supported payment methods",
+    "group": "gates",
+    "expected": "neither",
+    "accept": [
+      "neither"
+    ],
+    "pick": "neither",
+    "p": 1.0,
+    "probs": {
+      "newest": 0.0,
+      "oldest": 0.0,
+      "neither": 1.0
+    },
+    "intent": 0.0,
+    "ms": 303
+  },
+  {
+    "q": "what does the SLA promise for uptime",
+    "group": "gates",
+    "expected": "neither",
+    "accept": [
+      "neither"
+    ],
+    "pick": "neither",
+    "p": 1.0,
+    "probs": {
+      "newest": 0.0,
+      "oldest": 0.0,
+      "neither": 1.0
+    },
+    "intent": 0.0,
+    "ms": 287
+  },
+  {
+    "q": "how to request access to the analytics dashboard",
+    "group": "gates",
+    "expected": "neither",
+    "accept": [
+      "neither"
+    ],
+    "pick": "neither",
+    "p": 1.0,
+    "probs": {
+      "newest": 0.0,
+      "oldest": 0.0,
+      "neither": 1.0
+    },
+    "intent": 0.0,
+    "ms": 290
+  },
+  {
+    "q": "what is the escalation path for a sev1 incident",
+    "group": "gates",
+    "expected": "neither",
+    "accept": [
+      "neither"
+    ],
+    "pick": "neither",
+    "p": 0.99,
+    "probs": {
+      "newest": 0.01,
+      "oldest": 0.0,
+      "neither": 0.99
+    },
+    "intent": 0.0,
+    "ms": 301
+  },
+  {
+    "q": "how do we handle chargebacks",
+    "group": "gates",
+    "expected": "neither",
+    "accept": [
+      "neither"
+    ],
+    "pick": "neither",
+    "p": 1.0,
+    "probs": {
+      "newest": 0.0,
+      "oldest": 0.0,
+      "neither": 1.0
+    },
+    "intent": 0.0,
+    "ms": 290
+  },
+  {
+    "q": "what are the caching rules for the CDN",
+    "group": "gates",
+    "expected": "neither",
+    "accept": [
+      "neither"
+    ],
+    "pick": "neither",
+    "p": 1.0,
+    "probs": {
+      "newest": 0.0,
+      "oldest": 0.0,
+      "neither": 1.0
+    },
+    "intent": 0.0,
+    "ms": 324
+  },
+  {
+    "q": "describe the style guide for error messages",
+    "group": "gates",
+    "expected": "neither",
+    "accept": [
+      "neither"
+    ],
+    "pick": "neither",
+    "p": 1.0,
+    "probs": {
+      "newest": 0.0,
+      "oldest": 0.0,
+      "neither": 1.0
+    },
+    "intent": 0.0,
+    "ms": 417
+  },
+  {
+    "q": "what is the difference between staging and production",
+    "group": "gates",
+    "expected": "neither",
+    "accept": [
+      "neither"
+    ],
+    "pick": "neither",
+    "p": 1.0,
+    "probs": {
+      "newest": 0.0,
+      "oldest": 0.0,
+      "neither": 1.0
+    },
+    "intent": 0.0,
+    "ms": 289
+  },
+  {
+    "q": "how many retries does the webhook client make",
+    "group": "gates",
+    "expected": "neither",
+    "accept": [
+      "neither"
+    ],
+    "pick": "neither",
+    "p": 1.0,
+    "probs": {
+      "newest": 0.0,
+      "oldest": 0.0,
+      "neither": 1.0
+    },
+    "intent": 0.0,
+    "ms": 289
+  },
+  {
+    "q": "where is the deployment runbook",
+    "group": "gates",
+    "expected": "neither",
+    "accept": [
+      "neither"
+    ],
+    "pick": "neither",
+    "p": 1.0,
+    "probs": {
+      "newest": 0.0,
+      "oldest": 0.0,
+      "neither": 1.0
+    },
+    "intent": 0.0,
+    "ms": 333
+  },
+  {
+    "q": "what metrics does the health dashboard show",
+    "group": "gates",
+    "expected": "neither",
+    "accept": [
+      "neither"
+    ],
+    "pick": "neither",
+    "p": 1.0,
+    "probs": {
+      "newest": 0.0,
+      "oldest": 0.0,
+      "neither": 1.0
+    },
+    "intent": 0.0,
+    "ms": 288
+  },
+  {
+    "q": "how do we compute monthly active users",
+    "group": "gates",
+    "expected": "neither",
+    "accept": [
+      "neither"
+    ],
+    "pick": "neither",
+    "p": 1.0,
+    "probs": {
+      "newest": 0.0,
+      "oldest": 0.0,
+      "neither": 1.0
+    },
+    "intent": 0.0,
+    "ms": 292
+  }
+]

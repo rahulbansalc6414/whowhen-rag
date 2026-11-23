@@ -20,6 +20,7 @@ dependencies = ["typesafe-sdk>=0.7"]
 [project.urls]
 Homepage = "https://github.com/rahulbansalc6414/whowhen-rag"
 Issues = "https://github.com/rahulbansalc6414/whowhen-rag/issues"
+Changelog = "https://github.com/rahulbansalc6414/whowhen-rag/blob/main/CHANGELOG.md"
 
 [dependency-groups]
 dev = ["pytest>=8", "ruff>=0.6"]

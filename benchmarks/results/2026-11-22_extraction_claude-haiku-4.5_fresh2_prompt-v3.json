@@ -1,0 +1,140 @@
+{
+  "summary": {
+    "date": "2026-11-22",
+    "commit": "2883641",
+    "model": "anthropic/claude-haiku-4.5",
+    "set": "fresh2",
+    "prompt": "v3",
+    "label": "prompt-v3",
+    "cases": 15,
+    "filters_exact": 14,
+    "list_only_correct": 14,
+    "avg_prompt_tokens": 871,
+    "avg_completion_tokens": 74,
+    "median_seconds": 1.37
+  },
+  "results": [
+    {
+      "query": "what was added to the API guide since August",
+      "filters_ok": false,
+      "errors": [
+        "time: expected [('updated_at', '2026-08-01', None)], got [('created_at', '2026-08-01', None)]"
+      ],
+      "list_only_ok": true,
+      "list_only": false,
+      "cleaned_query": "API guide"
+    },
+    {
+      "query": "reports created before March",
+      "filters_ok": true,
+      "errors": [],
+      "list_only_ok": false,
+      "list_only": false,
+      "cleaned_query": "reports"
+    },
+    {
+      "query": "pages created since January",
+      "filters_ok": true,
+      "errors": [],
+      "list_only_ok": true,
+      "list_only": true,
+      "cleaned_query": ""
+    },
+    {
+      "query": "what is Lena's view on remote work",
+      "filters_ok": true,
+      "errors": [],
+      "list_only_ok": true,
+      "list_only": false,
+      "cleaned_query": "what is Lena's view on remote work"
+    },
+    {
+      "query": "what does Tomas think about the new pricing",
+      "filters_ok": true,
+      "errors": [],
+      "list_only_ok": true,
+      "list_only": false,
+      "cleaned_query": "what does Tomas think about the new pricing"
+    },
+    {
+      "query": "design docs updated since December",
+      "filters_ok": true,
+      "errors": [],
+      "list_only_ok": true,
+      "list_only": false,
+      "cleaned_query": "design docs"
+    },
+    {
+      "query": "incident notes created in December",
+      "filters_ok": true,
+      "errors": [],
+      "list_only_ok": true,
+      "list_only": false,
+      "cleaned_query": "incident notes"
+    },
+    {
+      "query": "specs Marco edited since the start of October",
+      "filters_ok": true,
+      "errors": [],
+      "list_only_ok": true,
+      "list_only": false,
+      "cleaned_query": "specs"
+    },
+    {
+      "query": "pages created last year",
+      "filters_ok": true,
+      "errors": [],
+      "list_only_ok": true,
+      "list_only": true,
+      "cleaned_query": ""
+    },
+    {
+      "query": "who leads the payments team",
+      "filters_ok": true,
+      "errors": [],
+      "list_only_ok": true,
+      "list_only": false,
+      "cleaned_query": "who leads the payments team"
+    },
+    {
+      "query": "notes from 2023 about the data warehouse",
+      "filters_ok": true,
+      "errors": [],
+      "list_only_ok": true,
+      "list_only": false,
+      "cleaned_query": "notes about the data warehouse"
+    },
+    {
+      "query": "the most recent compliance checklist",
+      "filters_ok": true,
+      "errors": [],
+      "list_only_ok": true,
+      "list_only": false,
+      "cleaned_query": "compliance checklist"
+    },
+    {
+      "query": "Priya's latest draft of the launch plan",
+      "filters_ok": true,
+      "errors": [],
+      "list_only_ok": true,
+      "list_only": false,
+      "cleaned_query": "draft of the launch plan"
+    },
+    {
+      "query": "how did the 2023 migration go",
+      "filters_ok": true,
+      "errors": [],
+      "list_only_ok": true,
+      "list_only": false,
+      "cleaned_query": "how did the 2023 migration go"
+    },
+    {
+      "query": "what has Marco written since April",
+      "filters_ok": true,
+      "errors": [],
+      "list_only_ok": true,
+      "list_only": true,
+      "cleaned_query": ""
+    }
+  ]
+}

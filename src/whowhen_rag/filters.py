@@ -14,12 +14,6 @@ class Condition:
     value: Any
 
 
-@dataclass(frozen=True)
-class Sort:
-    column: str
-    descending: bool
-
-
 @dataclass
 class Trace:
     """What happened inside detect(), for logging and cost tracking."""
@@ -27,8 +21,13 @@ class Trace:
     gate: Literal["regex", "classifier", "none"] = "none"
     classifier_called: bool = False
     llm_called: bool = False
+    jev_filter_p: float | None = None
+    jev_recency_p: float | None = None
+    jev_ms: int | None = None
+    llm_ms: int | None = None
     error: str | None = None
     unresolved_people: list[str] = field(default_factory=list)
+    year_corrections: list[str] = field(default_factory=list)
 
 
 @dataclass
@@ -36,22 +35,23 @@ class Filters:
     """Filters to apply to a search. All conditions are combined with AND.
 
     Attributes:
-        conditions: Conditions on your columns.
-        sort: Order results by this column, or None.
+        conditions: Conditions on your columns (dates and people), from the LLM.
+        recency: "newest" or "oldest" when the query asks for the most recent or the oldest
+            material, else None. A hint, from Jev: you decide how to apply it (see the README).
         list_only: The query only asks to list documents; skip semantic search if you can.
-        cleaned_query: The query without its time and person words, for the semantic search.
+        cleaned_query: The query without its time, person and recency words, for the semantic search.
         trace: Which gates ran and whether the LLM was called.
     """
 
     conditions: list[Condition] = field(default_factory=list)
-    sort: Sort | None = None
+    recency: Literal["newest", "oldest"] | None = None
     list_only: bool = False
     cleaned_query: str = ""
     trace: Trace = field(default_factory=Trace)
 
     @property
     def needs_filter(self) -> bool:
-        return bool(self.conditions or self.sort or self.list_only)
+        return bool(self.conditions or self.recency or self.list_only)
 
     def __bool__(self) -> bool:
         return self.needs_filter
@@ -80,12 +80,6 @@ class Filters:
                 parts.append(f"{col} {c.op} {placeholder}")
                 params.append(c.value)
         return " AND ".join(parts), params
-
-    def order_by_sql(self) -> str:
-        """An ORDER BY clause (with the words ORDER BY), or "" when there is no sort."""
-        if self.sort is None:
-            return ""
-        return f"ORDER BY {_quote(self.sort.column)} {'DESC' if self.sort.descending else 'ASC'}"
 
     # --- Vector stores -------------------------------------------------------
 

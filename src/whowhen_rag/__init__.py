@@ -10,10 +10,10 @@
 """
 from importlib.metadata import PackageNotFoundError, version
 
-from .classifier import Classifier, JevClassifier
+from .classifier import Classifier, JevClassifier, Judgement
 from .detector import Detector
 from .fields import Field
-from .filters import Condition, Filters, Sort, Trace
+from .filters import Condition, Filters, Trace
 from .gates import regex_signal
 
 __all__ = [
@@ -23,7 +23,7 @@ __all__ = [
     "Field",
     "Filters",
     "JevClassifier",
-    "Sort",
+    "Judgement",
     "Trace",
     "regex_signal",
 ]

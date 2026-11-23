@@ -1,9 +1,9 @@
 import logging
 
 import pytest
-from conftest import FIELDS, TODAY, FakeClassifier, answer
+from conftest import FIELDS, TODAY, FakeClassifier, FakeJev, answer
 
-from whowhen_rag import Condition, Detector, Field, Sort
+from whowhen_rag import Condition, Detector, Field
 
 
 def test_plain_query_never_calls_llm(make_detector):
@@ -90,11 +90,59 @@ def test_combined_time_and_person(make_detector):
     assert len(f.conditions) == 3
 
 
-def test_sort_newest(make_detector):
-    d, _ = make_detector(answer(sort={"field": "updated_at", "order": "newest"}, cleaned_query="runbook"))
+def test_regex_hit_runs_llm_and_jev_recency_together(make_detector):
+    jev = FakeJev(recency="newest", recency_p=0.99)
+    d, llm = make_detector(answer(cleaned_query="deployment runbook"), classifier=jev)
     f = d.detect("latest deployment runbook")
-    assert f.sort == Sort("modified_on", descending=True)
-    assert f.needs_filter and f.conditions == []
+    assert f.recency == "newest" and f.conditions == [] and f.needs_filter
+    assert f.cleaned_query == "deployment runbook"
+    assert jev.calls == [("latest deployment runbook", False, True)]  # recency question only
+    assert len(llm.prompts) == 1 and f.trace.gate == "regex"
+    assert f.trace.jev_recency_p == 0.99 and f.trace.llm_ms is not None and f.trace.jev_ms is not None
+
+
+def test_regex_miss_asks_jev_both_questions_in_one_call(make_detector):
+    jev = FakeJev(filter_p=0.99, recency="newest", recency_p=1.0)
+    d, llm = make_detector(answer(cleaned_query="search ranking project"), classifier=jev)
+    f = d.detect("fresh material on the search ranking project")
+    assert jev.calls == [("fresh material on the search ranking project", True, True)]
+    assert f.trace.gate == "classifier" and len(llm.prompts) == 1
+    assert f.recency == "newest" and f.cleaned_query == "search ranking project"
+
+
+def test_jev_no_filter_still_returns_recency_without_llm(make_detector):
+    jev = FakeJev(filter_p=0.2, recency="newest", recency_p=0.97)
+    d, llm = make_detector(answer(), classifier=jev)
+    f = d.detect("anything fresh on onboarding")
+    assert f.recency == "newest" and f.conditions == [] and f.needs_filter
+    assert llm.prompts == [] and f.cleaned_query == "anything fresh on onboarding"
+
+
+def test_jev_threshold_is_inclusive(make_detector):
+    d, llm = make_detector(answer(), classifier=FakeJev(filter_p=0.6))
+    d.detect("anything Priya put together on onboarding?")
+    assert len(llm.prompts) == 1
+
+
+def test_recency_and_dates_together(make_detector):
+    jev = FakeJev(recency="newest", recency_p=0.99)
+    d, _ = make_detector(answer(time_ranges=[{"field": "updated_at", "start": "2026-11-01", "end": None}],
+                                cleaned_query="runbook"), classifier=jev)
+    f = d.detect("latest runbook changes this month")
+    assert f.conditions == [Condition("modified_on", ">=", "2026-11-01")] and f.recency == "newest"
+
+
+def test_function_classifier_gives_no_recency(make_detector):
+    d, _ = make_detector(answer(cleaned_query="runbook"), classifier=FakeClassifier(True))
+    f = d.detect("latest deployment runbook")
+    assert f.recency is None
+
+
+def test_llm_failure_keeps_recency_hint(make_detector):
+    jev = FakeJev(recency="newest", recency_p=0.99)
+    d, _ = make_detector("not json", classifier=jev)
+    f = d.detect("latest deployment runbook")
+    assert f.recency == "newest" and f.conditions == [] and f.trace.error
 
 
 def test_list_only_clears_query(make_detector):

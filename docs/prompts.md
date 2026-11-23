@@ -5,11 +5,13 @@ The extraction prompt is a plain text template in [`src/whowhen_rag/prompts/`](.
 | Version | File | Status |
 |---|---|---|
 | v1 | [`v1.txt`](../src/whowhen_rag/prompts/v1.txt) | first version, kept for comparison |
-| v2 | [`v2.txt`](../src/whowhen_rag/prompts/v2.txt) | **default** |
+| v2 | [`v2.txt`](../src/whowhen_rag/prompts/v2.txt) | kept for comparison (asked the LLM for a sort; its `sort` answer is now ignored) |
+| v3 | not shipped | tried two extra rules, did worse than v2 (see below) |
+| v4 | [`v4.txt`](../src/whowhen_rag/prompts/v4.txt) | **default**: v2 without sorting; recency comes from Jev |
 
 ```python
-Detector(fields, llm)                         # v2
-Detector(fields, llm, prompt="v1")            # an older built-in version
+Detector(fields, llm)                         # v4
+Detector(fields, llm, prompt="v2")            # an older built-in version
 Detector(fields, llm, prompt="my_prompt.txt") # your own file
 Detector(fields, llm, prompt=template_text)   # your own text
 ```
@@ -27,7 +29,7 @@ Four placeholders are filled in at query time. Every other brace is literal, so 
 
 A template missing a required placeholder is rejected when the `Detector` is created, not at query time.
 
-Whatever the template says, the answer must be the JSON object v2 describes (`time_ranges`, `people`, `sort`, `list_only`, `cleaned_query`): that is what `whowhen-rag` parses and validates.
+Whatever the template says, the answer must be the JSON object v4 describes (`time_ranges`, `people`, `list_only`, `cleaned_query`): that is what `whowhen-rag` parses and validates. Any other key (such as v1 and v2's `sort`) is ignored.
 
 ## v1 to v2: what failed and what fixed it
 
@@ -50,19 +52,35 @@ v2 also states `list_only` more precisely: it is true when only generic document
 
 On a **fresh** set of 15 queries written after v2 was final, v2 scored **13/15**: "since September" was still read as last year, and "what is Marco's opinion on the caching proposal" got a person filter (arguable). That is the honest number for v2, and the starting point for a v3.
 
-The extra rules cost about 200 input tokens per call: about $0.0002 more per extraction with Haiku 4.5. The held-out queries were written before v2, but their v1 failures were seen while writing v2, so the v2 held-out score is not a clean held-out measurement. Full history: [`benchmarks/RESULTS.md`](../benchmarks/RESULTS.md).
+The extra rules cost about 200 input tokens per call: about 0.02 cents more per extraction with Haiku 4.5. The held-out queries were written before v2, but their v1 failures were seen while writing v2, so the v2 held-out score is not a clean held-out measurement. Full history: [`benchmarks/RESULTS.md`](../benchmarks/RESULTS.md).
+
+## v3: tried and not shipped
+
+On 2026-11-22 a new set of 15 queries ("fresh2") was written before v3, then v3 added two rules to v2: a month without a year resolves to the latest one that has started after any word ("since", "before"...), and a person's opinion, position or role is not a filter on their documents. Its examples deliberately used other months and wording than the test sets.
+
+| Prompt | main (30) | holdout (15) | fresh (15) | fresh2 (15) | Total |
+|---|---|---|---|---|---|
+| v2 | 30 | 15 | 13 | 13 | **71** |
+| v3 | 28 | 14 | 14 | 14 | 70 |
+
+The person rule fixed "what does Tomas think about..." but overcorrected ("Priya's notes on the vendor review" lost its person filter). The month rule did not hold: "since September" still went to 2025, and "in October", right under v2, went to 2025 too. Lesson: rewording a rule can move an error around instead of removing it.
+
+## v4: recency moves to Jev
+
+The first run of the single benchmark (all 119 questions through regex, Jev and the LLM) showed that 5 of v2's 7 misses were about recency. Asked for "security policies updated recently", Haiku 4.5 invented a two-week window; for "these days", seven days; for "what's new", today only. v2 said "sort only, no window", and the model ignored it. It also picked the created date or the updated date for "latest" seemingly at random.
+
+Jev, asked "newest, oldest or neither?", found all 16 recency questions with 0.99 to 1.00 confidence. So v4 removes every sorting instruction from the prompt and adds one rule in its place: words that only ask for the newest or oldest material are never a time range. The LLM extracts only dates and people; the recency hint comes from Jev. Results are in [`benchmarks/RESULTS.md`](../benchmarks/RESULTS.md).
 
 ## Writing your own
 
-1. Copy `src/whowhen_rag/prompts/v2.txt` and edit it: your domain's wording, another language, extra examples.
-2. Score it on the benchmark sets (needs an OpenRouter key; 30 or 15 LLM calls):
+1. Copy `src/whowhen_rag/prompts/v4.txt` and edit it: your domain's wording, another language, extra examples.
+2. Score it with the benchmark (needs `TYPESAFE_API_KEY` and `OPENROUTER_API_KEY`; about 90 LLM calls, about 1 cent with Haiku 5.5):
 
    ```bash
-   uv run python benchmarks/extraction.py --prompt my_prompt.txt
-   uv run python benchmarks/extraction.py --prompt my_prompt.txt --set holdout
+   uv run python benchmarks/run.py --prompt my_prompt.txt
    ```
 
-3. Better still, add your own labelled queries to `benchmarks/extraction_cases.py`. A prompt tuned on the same queries it is scored on will look better than it is, so keep some queries back.
+3. Better still, add your own labelled queries to `benchmarks/cases.py` first. A prompt tuned on the same queries it is scored on will look better than it is, so keep some queries back.
 4. Use it: `Detector(fields, llm, prompt="my_prompt.txt")`.
 
-A prompt that does better on a fresh set of queries is welcome as a pull request (as `v3.txt`, with its benchmark numbers).
+A prompt that does better on a fresh set of queries is welcome as a pull request (as `v5.txt`, with its benchmark numbers).

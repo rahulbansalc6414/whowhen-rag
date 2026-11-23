@@ -1,4 +1,5 @@
 import json
+import socket
 from datetime import date
 
 import pytest
@@ -21,6 +22,8 @@ class FakeLLM:
 
 
 class FakeClassifier:
+    """A plain function-style classifier (query -> bool): filter gate only, no recency."""
+
     def __init__(self, result: bool):
         self.result = result
         self.calls: list[str] = []
@@ -30,11 +33,27 @@ class FakeClassifier:
         return self.result
 
 
-def answer(time_ranges=(), people=(), sort=None, list_only=False, cleaned_query=""):
+class FakeJev:
+    """Stands in for JevClassifier: answers the filter and recency questions."""
+
+    threshold = 0.6
+
+    def __init__(self, filter_p: float = 0.0, recency: str | None = None, recency_p: float = 0.0):
+        self.filter_p, self.recency, self.recency_p = filter_p, recency, recency_p
+        self.calls: list[tuple[str, bool, bool]] = []
+
+    def judge(self, query, *, ask_filter=True, ask_recency=True):
+        from whowhen_rag import Judgement
+        self.calls.append((query, ask_filter, ask_recency))
+        return Judgement(filter_p=self.filter_p if ask_filter else None,
+                         recency=self.recency if ask_recency else None,
+                         recency_p=self.recency_p if ask_recency else None)
+
+
+def answer(time_ranges=(), people=(), list_only=False, cleaned_query=""):
     return {
         "time_ranges": list(time_ranges),
         "people": list(people),
-        "sort": sort,
         "list_only": list_only,
         "cleaned_query": cleaned_query,
     }
@@ -56,3 +75,13 @@ def make_detector():
         return d, llm
 
     return _make
+
+
+@pytest.fixture(autouse=True)
+def _no_network(monkeypatch):
+    """Every test fails loudly if it tries to open a network connection."""
+    def refuse(*args, **kwargs):
+        raise RuntimeError("tests must not use the network")
+
+    monkeypatch.setattr(socket.socket, "connect", refuse)
+    monkeypatch.setattr(socket, "create_connection", refuse)

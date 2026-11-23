@@ -16,13 +16,21 @@ def test_builtin_prompts_load_and_fill(name):
     assert '"time_ranges": [{"field"' in text  # literal JSON braces survive
 
 
-def test_default_is_v2():
-    assert load_prompt() == load_prompt("v2")
-    assert "calendar month" in load_prompt("v2") and "calendar month" not in load_prompt("v1")
+def test_default_is_v4_without_sort():
+    assert load_prompt() == load_prompt("v4")
+    assert '"sort"' not in load_prompt("v4") and '"sort"' in load_prompt("v2")
+    assert "calendar month" in load_prompt("v4") and "calendar month" not in load_prompt("v1")
+
+
+def test_old_prompts_sort_key_is_ignored():
+    from whowhen_rag.extract import parse_answer
+    ex = parse_answer('{"time_ranges": [], "people": [], "sort": {"field": "updated_at", "order": "newest"}}',
+                      FIELDS)
+    assert not hasattr(ex, "sort")
 
 
 def test_query_text_is_never_treated_as_placeholder():
-    text = build_prompt("notes about {filters} and {today}", FIELDS, TODAY, load_prompt("v2"))
+    text = build_prompt("notes about {filters} and {today}", FIELDS, TODAY, load_prompt("v4"))
     assert text.endswith("Query: notes about {filters} and {today}")
 
 
@@ -41,4 +49,4 @@ def test_bad_prompts_fail_at_construction(tmp_path):
     with pytest.raises(ValueError, match="missing placeholders"):
         Detector(FIELDS, lambda p: "", use_classifier=False, prompt="Only {query}")
     with pytest.raises(ValueError, match="not a built-in"):
-        Detector(FIELDS, lambda p: "", use_classifier=False, prompt="v9")
+        Detector(FIELDS, lambda p: "", use_classifier=False, prompt="v3")
